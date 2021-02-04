@@ -1,5 +1,15 @@
 # A generilized overview of the teams strengths.
 
+## Positions 
+
+* Leader
+
+* Member
+ * James Bates
+ * Nathan Holst
+ * Spencer Kastler
+ * Spencer Clemens
+ 
 ## Skills
 
 * Python
