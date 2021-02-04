@@ -5,3 +5,16 @@ The members of this team are James Bates, Nathan Holst, Spencer Clemens, and Spe
 
 Proffessor: Dan Watson
 TA: Bradley Payne
+
+## Repo Organization and Naming Scheme
+
+## Version Control Procedure
+
+## Tool Stack Description and Setup Procedure
+
+## Build Instructions
+
+## Unit Testing
+
+## System Testing
+
