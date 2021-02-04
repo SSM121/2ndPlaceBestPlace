@@ -3,13 +3,13 @@
 ## Positions 
 
 * Leader
- * NA
+  * NA
  
 * Member
- * James Bates
- * Nathan Holst
- * Spencer Kastler
- * Spencer Clemens
+  * James Bates
+  * Nathan Holst
+  * Spencer Kastler
+  * Spencer Clemens
  
 ## Skills
 
