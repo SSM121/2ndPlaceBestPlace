@@ -12,9 +12,14 @@ TA: Bradley Payne
 ## Version Control Procedure
 
 ## Tool Stack Description and Setup Procedure
+### Software stack requirements
+Python 3.7 or later
+Django 3.1.5 or later
+Vanilla Javascript
 
+On first git pull run ```python src/manage.py migrate```
 ## Build Instructions
-
+run ```python src/manage.py runserver```
 ## Unit Testing
 
 ## System Testing
