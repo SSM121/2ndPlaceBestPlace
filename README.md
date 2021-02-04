@@ -13,10 +13,11 @@ TA: Bradley Payne
 
 ## Tool Stack Description and Setup Procedure
 ### Software stack requirements
-Python 3.7 or later
-Django 3.1.5 or later
-Vanilla Javascript
+1. Python 3.7 or later
+2. Django 3.1.5 or later
+3. Vanilla Javascript
 
+### Setup instructions
 On first git pull run ```python src/manage.py migrate```
 ## Build Instructions
 run ```python src/manage.py runserver```
