@@ -1,3 +1,3 @@
 # Parking Genie
-## Project Overview
-[Project Summary](projectSummary.md)
+## [Project Summary](projectSummary.md)
+## [Team Organization](teamOrganization.md)
