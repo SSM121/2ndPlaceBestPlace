@@ -8,7 +8,7 @@ Proffessor: Dan Watson
 TA: Bradley Payne
 
 ## Repo Organization and Naming Scheme
-
+Lower Camel Case is the naming scheme for any file we can change the name. Django file names are default. The source files are located in the src directory and the documentation is located in docs. 
 ## Version Control Procedure
 
 ## Tool Stack Description and Setup Procedure
