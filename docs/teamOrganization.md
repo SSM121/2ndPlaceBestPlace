@@ -7,7 +7,6 @@
  
 * Member
   * James Bates
-  * Nathan Holst
   * Spencer Kastler
   * Spencer Clemens
  
