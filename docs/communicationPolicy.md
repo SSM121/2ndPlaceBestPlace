@@ -1,4 +1,4 @@
-# Communication Policy 2/4/2021
+# Communication Policy 2/11/2021
 
 ## General Communication
 * Policies for communication
@@ -16,8 +16,9 @@
 
 * Online cordination --- Needs more work past this point
   * Discord
-  * Scrum App?
+  * Trello Board
 * Reporting progress
-  * Scrum board?
+  * Trello Board
+  * Final Group Review before Assignment Due Date
 
 
