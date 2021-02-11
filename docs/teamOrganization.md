@@ -2,8 +2,8 @@
 
 ## Positions 
 
-* Leader
-  * NA
+* Leader (Project Manager)
+  * Nathan Holst
  
 * Member
   * James Bates
