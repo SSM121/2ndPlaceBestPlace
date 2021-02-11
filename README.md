@@ -10,7 +10,7 @@ TA: Bradley Payne
 ## Repo Organization and Naming Scheme
 Lower Camel Case is the naming scheme for any file we can change the name of. Django default file names are left as is. The source files are located in the src directory and the documentation is located in docs. 
 ## Version Control Procedure
-
+Each member should fork or branch the repo and submit pull or merge requests. The requests should be reviewed by someone else on the team before they are accepted. If 24 hrs go by without a review the person submitting the code may accept the merge.
 ## Tool Stack Description and Setup Procedure
 ### Software stack requirements
 1. Python 3.7 or later
