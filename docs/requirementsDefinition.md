@@ -24,7 +24,36 @@ Add parking lot to Event.
 Receive income from application.
 
 # Functional Requirements
-
+## Account manipulation
+Ability to create an account
+Ability to delete an account
+Ability to edit an account
+Ability to authenticate an account
+## Event manipulation
+Ability to add events
+Ability to cancel events
+Ability to edit events
+## Parking Lot manipulation
+Ability to add parking lots
+Ability to remove parking lots
+Ability to connect parking lots to an event
+Ability to buy a parking space
+Ability to cancel purchase of a parking space
+Ability to show parking location(s)
+Ability to filter parking by location
+## Money manipulations
+Ability to receive payments
+Ablitiy to authenticate payment
+Ability to Add money to fictional test account
+Ability to check revenue of all lots
+Ability to check revenue of single parking lot
+Ability to pay owners their due
+Ability to pay managers their due
+Ability to filter parking by price
+## Additional Authentications
+Ability to receive QR codes as proof of purchase
+Ability to generate QR codes 
+Ability to authenticate QR codes
 
 # Non-Functional Requirements
 
