@@ -59,7 +59,9 @@ Ability to generate QR codes
 Ability to authenticate QR codes
 
 # Non-Functional Requirements
-
+*Under Consideration/Subject to Change*
+Weekly Stand up meeting held over Discord Sunday at 2 p.m. 
+Tracking feature development, testing, and debugging progress on Trello board.
 
 # Future Features
 
