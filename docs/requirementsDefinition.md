@@ -64,6 +64,8 @@ Weekly Stand up meeting held over Discord Sunday at 2 p.m.
 Tracking feature development, testing, and debugging progress on Trello board.
 
 # Future Features
+1. Android and ios apps
+2. integration with various payment systems
 
 
 # Glossary
