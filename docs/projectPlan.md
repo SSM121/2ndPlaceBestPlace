@@ -16,6 +16,13 @@ Each phase will also be a little like an iteration in a Spiral process, in that 
 We will use Unified Modeling Language (UML) to document user goals, structural concepts, component interactions, and behaviors.
 
 ## [Communication policies, procedures, and tools](communicationPolicy.md)
-## [Risk Analysis](riskAnalysis.md)
+## Risk Analysis
+Lack of communication or procrasination on a task.
+    - @mentions on Discord and assistance from other team members if they are stalled due to programming block.
+    - Review stage of all projects before they are considered "Done"
+    - Due dates set to give review time 
+InterProgram incompatability
+    - all hands Google search call to the team, until we find a solution. 
+
 ## Configuration Managment
 See the repo [README](../README.md)
