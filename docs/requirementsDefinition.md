@@ -1,4 +1,7 @@
 # Introduction and Context
+When a large event happens up at the University there can be a major influx of vehicles attempting to park as close as possible while also not having to pay very much. Some of these vehicles expect a large group area in which to "tailgate" before the event, while others just want a space big enough to squeeze their car into. Because all of these vehicles attempting to fight for the same few parking spots can create not only stress, but sometimes irritation leading to road rage. The Parking Genie, is a savior for all. Even if you end up parking farther away than you would have liked, knowing that you have a parking spot can still take away the stress of getting to an event and not having a place to park.
+
+This document describes the different users and their goals. It then describes the function requirements of how this program will assist those users in acheiving their goals, and the non-functional requirements of how this program is being developed. The next section covers the future features that have yet to be added to this program, yet are not yet implemented. The final portion of this document is a Glossary of terms and how they are defined in the context of this program.
 
 # Users and Their Goals
 ## Administrator
