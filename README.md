@@ -26,7 +26,7 @@ run ```python src/manage.py runserver```
 As no code has been written the team will eventually create methods that verfie that specfic sections of the probram behiave as designed. The unit tests will have three phases.
 #### The three phases of unit tests
  1. Initialize a small chunk of the program (AKA System under test)
- 2. Applie some stimulus to the system under test
+ 2. Apply some stimulus to the system under test
  3. Observe resulting behavior
  ## System Testing
 
