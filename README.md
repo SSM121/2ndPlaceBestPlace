@@ -28,5 +28,15 @@ As no code has been written the team will eventually create methods that verfie 
  1. Initialize a small chunk of the program (AKA System under test)
  2. Apply some stimulus to the system under test
  3. Observe resulting behavior
- ## System Testing
+## System Testing
+#### Intro
+ Just like in the unit testing section code has yet to be written so the following will be a general outline of what the team is planning on doing. The purpose of the system test is to determine if the system works as a whole unit. The team will test the software for the following.
+#### Things to look for in system testing:
+* Mainline functions: Do the main functions of the application behave as expected?
+* Basic Usability: Can a user freely navigate through the screens without any difficulties
+* Accessibility: Is the system easily accessible for the end user?
+* Error Conditions: Are suitable error messages displayed when something goes wrong?
+* Load Testing: Does the system work well under load?
+* Regression Testing: When a new feature is added does the addition create or recreate bugs? 
+
 
