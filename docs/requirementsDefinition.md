@@ -27,45 +27,57 @@ Add parking lot to Event.
 Receive income from application.
 
 # Functional Requirements
-## Account manipulation
-Ability to create an account
-Ability to delete an account
-Ability to edit an account
-Ability to authenticate an account
-## Event manipulation
-Ability to add events
-Ability to cancel events
-Ability to edit events
-## Parking Lot manipulation
-Ability to add parking lots
-Ability to remove parking lots
-Ability to connect parking lots to an event
-Ability to buy a parking space
-Ability to cancel purchase of a parking space
-Ability to show parking location(s)
-Ability to filter parking by location
-## Money manipulations
-Ability to receive payments
-Ablitiy to authenticate payment
-Ability to Add money to fictional test account
-Ability to check revenue of all lots
-Ability to check revenue of single parking lot
-Ability to pay owners their due
-Ability to pay managers their due
-Ability to filter parking by price
-## Additional Authentications
-Ability to receive QR codes as proof of purchase
-Ability to generate QR codes 
-Ability to authenticate QR codes
+1. Account manipulation
+#### The ability for a customer, manager, owner, or administrator to launch, terminate, or edit the properties of an account based apon the users autherization level.
+    1. create an account
+    2. edit an account
+    3. delete an account
+    4. vauthenticate an account
+2. Parking Lot manipulation
+
+#### The ability for a manager, owner, or administrator to launch, terminate, or edit the properties of a parking lot based apon the users autherization level.
+    1. add parking lots
+    2. remove parking lots
+    3. connect parking lots to an event
+    4. filter parking by location
+3. Purchase parking spots
+
+#### The ability for a user to purchase a spot for an event.
+    1. buy a parking space
+    2. show parking location(s)
+    3. filter parking by location
+    4. cancel purchase of a parking space
+5. Event manipulation
+
+#### The ability for a manager, or administrator to launch, terminate, or edit the properties of an Event based apon the users autherization level.
+    1. add events
+    2. edit events
+    3. cancel events
+6. Money manipulations
+
+#### Receive payments from the user or assign credit to mangers and owners.
+    1. receive payments/ Deduct credit from account
+    2. Add money to fictional test account
+    3. check revenue of all lots/ specific lots
+    4. Pay out users
+    5. Filter parking by price
+7. Parking pass generation 
+
+#### Generate QR codes for the users to display at arivial of the parking lot
+    1. receive QR codes as proof of purchase
+    2. generate QR codes 
+    3. authenticate QR codes
+
 
 # Non-Functional Requirements
-*Under Consideration/Subject to Change*
-Weekly Stand up meeting held over Discord Sunday at 2 p.m. 
-Tracking feature development, testing, and debugging progress on Trello board.
+1. Back End Authentication
+    1. Payment Authentication
+    2. User Rights Authentication
+    3. Use cryptogaphry instead of plain text for user password Authentication
 
 # Future Features
 1. Android and ios apps
-2. integration with various payment systems
+2. integration with various payment systems 
 
 
 # Glossary
