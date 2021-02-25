@@ -28,28 +28,28 @@ Receive income from application.
 
 # Functional Requirements
 1. Account manipulation
-#### The ability for a customer, manager, owner, or administrator to launch, terminate, or edit the properties of an account based apon the users autherization level.
+#### The ability for a customer, manager, owner, or administrator to launch, terminate, or edit the properties of an account based apon the users authorization level.
     1. create an account
     2. edit an account
     3. delete an account
-    4. vauthenticate an account
+    4. authenticate an account
 2. Parking Lot manipulation
 
-#### The ability for a manager, owner, or administrator to launch, terminate, or edit the properties of a parking lot based apon the users autherization level.
+#### The ability for a manager, owner, or administrator to launch, terminate, or edit the properties of a parking lot based apon the users authorization level.
     1. add parking lots
     2. remove parking lots
     3. connect parking lots to an event
     4. filter parking by location
+    5. filter parking by price
 3. Purchase parking spots
 
 #### The ability for a user to purchase a spot for an event.
     1. buy a parking space
     2. show parking location(s)
-    3. filter parking by location
-    4. cancel purchase of a parking space
+    3. cancel purchase of a parking space
 4. Event manipulation
 
-#### The ability for a manager, or administrator to launch, terminate, or edit the properties of an Event based apon the users autherization level.
+#### The ability for a manager, or administrator to launch, terminate, or edit the properties of an Event based apon the users authorization level.
     1. add events
     2. edit events
     3. cancel events
@@ -60,7 +60,6 @@ Receive income from application.
     2. Add money to fictional test account
     3. check revenue of all lots/ specific lots
     4. Pay out users
-    5. Filter parking by price
 6. Parking pass generation 
 
 #### Generate QR codes for the users to display at arivial of the parking lot
