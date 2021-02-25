@@ -47,13 +47,13 @@ Receive income from application.
     2. show parking location(s)
     3. filter parking by location
     4. cancel purchase of a parking space
-5. Event manipulation
+4. Event manipulation
 
 #### The ability for a manager, or administrator to launch, terminate, or edit the properties of an Event based apon the users autherization level.
     1. add events
     2. edit events
     3. cancel events
-6. Money manipulations
+5. Money manipulations
 
 #### Receive payments from the user or assign credit to mangers and owners.
     1. receive payments/ Deduct credit from account
@@ -61,7 +61,7 @@ Receive income from application.
     3. check revenue of all lots/ specific lots
     4. Pay out users
     5. Filter parking by price
-7. Parking pass generation 
+6. Parking pass generation 
 
 #### Generate QR codes for the users to display at arivial of the parking lot
     1. receive QR codes as proof of purchase
