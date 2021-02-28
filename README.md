@@ -4,7 +4,7 @@ This is the main repo for CS-3450, Introduction to Software Engineering, Spring 
 The members of this team are James Bates, Nathan Holst, Spencer Clemens, and Spencer Kasteler.
 
 
-Proffessor: Dan Watson
+Professor: Dan Watson
 TA: Bradley Payne
 
 ## Repo Organization and Naming Scheme
