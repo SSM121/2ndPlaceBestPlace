@@ -87,53 +87,41 @@ We will use Unified Modeling Language (UML) to document user goals, structural c
   * Final Group Review before Assignment Due Date
 
 ## Risk Analysis
-###1 Account Manipulation
-*Likelyhood: low
-*Severity: high
-*Consequences:
-Because this includes account verification, there would be no way to sign in to the account, so no one could add events, no one could add parking to those events, no one could purchase parking spots or verify that a parking spot was purchased.
-*Workarounds:
-Go back to how things are without the app, first come first serve for parking with the attendant taking money when the customer arrives.
+### 1 Account Manipulation
+* Likelyhood: low
+* Severity: high
+* Consequences: Because this includes account verification, there would be no way to sign in to the account, so no one could add events, no one could add parking to those events, no one could purchase parking spots or verify that a parking spot was purchased.
+* Workarounds: Go back to how things are without the app, first come first serve for parking with the attendant taking money when the customer arrives.
 
-###2 Parking Lot Manipulation
-*Likelyhood: low
-*Severity: high
-*Consequences:
-There would be no parking available in the database in which to purchase parking for an Event.
-*Workarounds:
-Go back to how things are without the app, first come first serve for parking with the attendant taking money when the customer arrives.
+### 2 Parking Lot Manipulation
+* Likelyhood: low
+* Severity: high
+* Consequences: There would be no parking available in the database in which to purchase parking for an Event.
+* Workarounds: Go back to how things are without the app, first come first serve for parking with the attendant taking money when the customer arrives.
 
-###3 Purchase Parking Spots
-*Likelyhood: low
-*Severity: med
-*Consequences:
-Customers would only be able to view available parking lots not purchase a space prior to event.
-*Workarounds:
-Attendants update current lot availability, and sell spots at entry to parking lot.
+### 3 Purchase Parking Spots
+* Likelyhood: low
+* Severity: med
+* Consequences: Customers would only be able to view available parking lots not purchase a space prior to event.
+* Workarounds: Attendants update current lot availability, and sell spots at entry to parking lot.
 
-###4 Event Manipulation
-*Likelyhood: low
-*Severity: high
-*Consequences:
-No events, no need for parking at those events...
-*Workarounds:
-Go back to how things are without the app, first come first serve for parking with the attendant taking money when the customer arrives.
+### 4 Event Manipulation
+* Likelyhood: low
+* Severity: high
+* Consequences: No events, no need for parking at those events...
+* Workarounds: Go back to how things are without the app, first come first serve for parking with the attendant taking money when the customer arrives.
 
-###5 Money Manipulation
-*Likelyhood: low
-*Severity: med
-*Consequences: 
-Customers would not be able to purchase a parking spot, Owners would not receive their payment from customers.
-*Workarounds:
-Modify code for customers to "reserve" a parking space, then have attendants collect payment upon arrival of customer.
+### 5 Money Manipulation
+* Likelyhood: low
+* Severity: med
+* Consequences:  Customers would not be able to purchase a parking spot, Owners would not receive their payment from customers.
+* Workarounds: Modify code for customers to "reserve" a parking space, then have attendants collect payment upon arrival of customer.
 
-###6 Parking Pass Generation
-*Likelyhood: low
-*Severity: med
-*Consequences:
-Customer would not have any form of receipt for their purchase, or proof that they should park in that spot.
-*Workarounds:
-Attendants check customers names off of a list of those having purchased a spot in their lot.
+### 6 Parking Pass Generation
+* Likelyhood: low
+* Severity: med
+* Consequences: Customer would not have any form of receipt for their purchase, or proof that they should park in that spot.
+* Workarounds: Attendants check customers names off of a list of those having purchased a spot in their lot.
 
 
 ## Configuration Managment
