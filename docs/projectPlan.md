@@ -81,7 +81,7 @@ We will use Unified Modeling Language (UML) to document user goals, structural c
 
 * Online cordination --- Needs more work past this point
   * Discord
-  * Trello Board : https://trello.com/b/WEys9Bi9/2ndplacebestplacetrelloboard
+  * Discord Projects
 * Reporting progress
   * Trello Board
   * Final Group Review before Assignment Due Date
