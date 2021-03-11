@@ -39,7 +39,7 @@ As no code has been written the team will eventually create methods that verfie 
 * Load Testing: Does the system work well under load?
 * Regression Testing: When a new feature is added does the addition create or recreate bugs? 
 
-# Poll Request Instructions.
+# Pull Request Instructions.
 Step 1. Push to your Origin (not the master repository/upstream)
 
 Step 2. go to  github.com and navigate to your fork that you just pushed your changes to.
@@ -50,4 +50,6 @@ Step 4. select What branch you would like to merge your changes into.
 
 Step 5. select what branch you made your changes to as the branch to merge.
 
-Step 6. click the botton that says 
+Step 6. click the botton that says "Create Pull Request" 
+
+Step 7. wait for someone to review your changes or 24 hours pass then click "merge pull"
