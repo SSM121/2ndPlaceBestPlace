@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Account Management</title>
+	<link rel="stylesheet" href="../../static/parkingGenie/main.css">
+</head>
+<body>
+	<div class="wrapper"?
+		<div class="account">
+			<center><h2>{{ account.name }}>/h2></center>
+			<% for option in account.info_list.all %}
+				<li>{{ option.title }} <input type="text" value="{{ option.val }}">
+		</div>
+	</div>
+</body>
+</html>
