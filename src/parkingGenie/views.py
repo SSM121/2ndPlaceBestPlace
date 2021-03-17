@@ -11,3 +11,6 @@ def logIn(request):
 
 def register(request):
     return render(request, 'parkingGenie/register.html')
+
+def addLot(request):
+    return render(request, 'parkingGenie/addLot.html')
