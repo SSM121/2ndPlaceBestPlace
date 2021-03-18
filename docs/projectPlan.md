@@ -80,11 +80,11 @@ We will use Unified Modeling Language (UML) to document user goals, structural c
   * The team meets every Tuesday and Thursday during class time.
   * Additinal meetings can be set up if desired.
 
-* Online cordination --- Needs more work past this point
+* Online cordination
   * Discord
   * Discord Projects
 * Reporting progress
-  * Trello Board
+  * Git Projects
   * Final Group Review before Assignment Due Date
 
 ## Risk Analysis
