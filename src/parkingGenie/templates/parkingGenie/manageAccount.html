@@ -8,6 +8,8 @@
 	<div class="wrapper"?
 		<div class="account">
 			<center><h2>{{ account.name }}>/h2></center>
+				<li>Name <input type="text" value="{{ account.name }}">
+				<li>Email/Username <input type="text" value="{{ account.usrName }}">
 			<% for option in account.info_list.all %}
 				<li>{{ option.title }} <input type="text" value="{{ option.val }}">
 		</div>
