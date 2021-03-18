@@ -3,19 +3,20 @@
 ### general overview
 The Parking Lot Genie is an app that helps connect event directors with local parking space owners and event attendees. From dedicated parking lots to individual driveways the Parking Lot Genie helps simplify finding a place to park for any event.
 ### Current Phase
-The Parking Genie is currently under development. The team is in the requirements gathering phase. The main goals/ objectives of this phase are to visualize and describe in detail what the finished project should look like. During this phase we are also flushing out team roles, project structure, definitions, and other organizational materials. 
+The Parking Genie is currently under development. The team is in the development phase. The main goals/ objectives of this phase are to create the needed HTML pages, CSS, and functionality to enable users to interact with the data bases. This phase will be completed by April 14th.
 
 ## Team Organization
 
 ### Positions 
 
 * Leader (Project Manager)
-  * Nathan Holst
+  * TBD
  
 * Member
-  * James Bates
-  * Spencer Kastler
-  * Spencer Clemens
+  * Nathan Holst ( Was in charge of Mile stone 1) 
+  * James Bates 
+  * Spencer Kastler ( Was in charge of Sprint One in Mile stone 3)
+  * Spencer Clemens ( Was in charge of Mile Stone 2)
  
 ### Skills
 
