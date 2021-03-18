@@ -6,4 +6,4 @@ class Account(models.Model):
     name = models.CharField(max_length=40)
     email = models.EmailField(max_length=254)
     password = models.IntegerField()
-    accntInfo = JSONField()
+    accntInfo = models.JSONField()
