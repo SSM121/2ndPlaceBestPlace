@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.template import loader
 
+
 def index(request):
     return render(request, 'parkingGenie/index.html')
 
@@ -12,7 +13,15 @@ def logIn(request):
 def register(request):
     return render(request, 'parkingGenie/register.html')
 
-  
+
+def dashBoard(request):
+    return render(request, 'parkingGenie/dashBoard.html')
+
+
+def manageAccount(request):
+    return render(request, 'parkingGenie/manageAccount.html')
+
+
 def addEvent(request):
     return render(request, 'parkingGenie/addEvent.html')
 

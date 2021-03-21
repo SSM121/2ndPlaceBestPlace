@@ -9,7 +9,8 @@ urlpatterns = [
     path('register', views.register, name='register'),
     path('addEvent', views.addEvent, name='addEvent'),
     path('addLot', views.addLot, name='addLot'),
+    path('dashBoard', views.dashBoard, name='dashBoard'),
+    path('manageAccount', views.manageAccount, name='manageAccount'),
     path('events', views.searchEvents, name='searchEvents'),
     path('event/<int:event_id>', views.lotSearch, name='lotSearch'),
-
 ]
