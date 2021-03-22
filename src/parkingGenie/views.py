@@ -1,6 +1,5 @@
-from django.shortcuts import render, redirect
-
-
+from django.shortcuts import render, redirect, get_object_or_404
+from .models import Account
 
 def index(request):
     return render(request, 'parkingGenie/index.html')
@@ -8,8 +7,8 @@ def index(request):
 
 def logIn(request):
     if request.method == "POST":
-        name = request.POST
-        request.session["name"] = name
+        request.session['userEmail'] = request.user.email
+        request.session['userName'] = request.user.username
         return redirect('parkingGenie:dashBoard')
     elif request.method == "GET":
         return render(request, 'parkingGenie/login.html')
@@ -33,7 +32,8 @@ def dashBoard(request):
 
 def manageAccount(request):
     context = {
-        "account": request.session.get("name")
+        "userEmail": request.session.get("userEmail"),
+        "userName": request.session.get("userName")
     }
     return render(request, 'parkingGenie/manageAccount.html', context=context)
 
