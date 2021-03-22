@@ -9,7 +9,7 @@
 <body>
 	<center><h1 class="display-2">User Account Info</h1></center>
 	<div class="wrapper"?>
-		<center><h2>{{ account.name }}</h2></center>
+		<center><h2>{{ account }}</h2></center>
 		<li>Name <input type="text" value="{{ account.name }}">
 		<li>Email/Username <input type="text" value="{{ account.usrName }}">
 			<% for option in account.info_list.all %}

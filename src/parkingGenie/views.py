@@ -7,6 +7,7 @@ def index(request):
 
 
 def logIn(request):
+    request.session["name"] = "A user name"
     return render(request, 'parkingGenie/login.html')
 
 
@@ -19,11 +20,15 @@ def forgotUser(request):
 
 
 def dashBoard(request):
+
     return render(request, 'parkingGenie/dashBoard.html')
 
 
 def manageAccount(request):
-    return render(request, 'parkingGenie/manageAccount.html')
+    context = {
+        "account": request.session.get("name")
+    }
+    return render(request, 'parkingGenie/manageAccount.html', context=context)
 
 
 def addEvent(request):
@@ -60,6 +65,18 @@ def searchEvents(request):
         "name": "USU Vs SDSU",
         "date": "Oct. 19, 2021",
         "startTime": "3:00 p.m."
+    })
+    eventList.append({
+        "id": 3,
+        "name": "USU Vs UNlV",
+        "date": "Oct. 20, 2021",
+        "startTime": "3:00 p.m."
+    })
+    eventList.append({
+        "id": 4,
+        "name": "USU Vs U of U",
+        "date": "Oct. 21, 2021",
+        "startTime": "5:00 p.m."
     })
     context = {
         'eventList': eventList,
