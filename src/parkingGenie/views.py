@@ -14,6 +14,10 @@ def register(request):
     return render(request, 'parkingGenie/register.html')
 
 
+def forgotUser(request):
+    return render(request, 'parkingGenie/forgotUser.html')
+
+
 def dashBoard(request):
     return render(request, 'parkingGenie/dashBoard.html')
 
