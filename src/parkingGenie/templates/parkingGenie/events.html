@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <title>Parking Genie Template</title>
     <link rel="stylesheet" href="../../static/parkingGenie/main.css">
@@ -8,27 +8,30 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script></head>
 <body>
-    <h1>Upcomming events</h1>
     <div class="container">
+        <h1>Upcomming events</h1>
         <div class="row">
             <div class="col col-8">
-                <ul>
+                <div data-bs-spy="scroll" data-bs-target="#navbar-example2" data-bs-offset="0" tabindex="0">
                     {% for event in eventList %}
-                        <li id="event-{{event.id}}-list-item">
-                                <div >
-                                    <h2><a href="event/{{event.id}}"> {{event.name}} </a></h2>
-                                    <h3>{{event.date}} </h3>
-                                    <h3>{{event.startTime}} </h3>
-                                </div>
-                        </li>
+                        <div class="card" style="width: 18rem;">
+                            <div class="card-body">
+                                <h4 class="card-title">{{event.name}}</h4>
+                                <h5 class="card-subtitle mb-2 text-muted">{{event.date}}</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">event-{{event.id}}-list-item</h6>
+                                <p class="card-text">Event details</p>
+                                <a href="#" class="card-link">Card link</a>
+                                <a href="#" class="card-link">Another link</a>
+                            </div>
+                        </div>
                     {% endfor %}
-                </ul>
+                </div>
             </div>
             <div class="col col-4">
                 Some sort of sorting over here. we did not plan how this page could be sorted
             </div>
         </div>
+        <a class="btn btn-primary" href="dashBoard" role="button">Dash Board</a>
     </div>
 </body>
-
 </html>
