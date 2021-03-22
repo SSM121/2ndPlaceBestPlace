@@ -1,5 +1,5 @@
-from django.shortcuts import render
-from django.template import loader
+from django.shortcuts import render, redirect
+
 
 
 def index(request):
@@ -7,8 +7,12 @@ def index(request):
 
 
 def logIn(request):
-    request.session["name"] = "A user name"
-    return render(request, 'parkingGenie/login.html')
+    if request.method == "POST":
+        name = request.POST
+        request.session["name"] = name
+        return redirect('parkingGenie:dashBoard')
+    elif request.method == "GET":
+        return render(request, 'parkingGenie/login.html')
 
 
 def register(request):
@@ -24,7 +28,6 @@ def forgotPassword(request):
 
 
 def dashBoard(request):
-
     return render(request, 'parkingGenie/dashBoard.html')
 
 
