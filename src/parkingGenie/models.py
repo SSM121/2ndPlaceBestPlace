@@ -7,9 +7,9 @@ class Account(models.Model):
     accntType = models.CharField(max_length=10, help_text='The type of Account: User, Owner, or Manager')
     name = models.CharField(max_length=40, help_text='Name of the user')
     email = models.EmailField(max_length=254, help_text='Email of the user')
-    password = models.IntegerField()
+    password = models.CharField(max_length= 15, help_text="The users password")
     id = models.UUIDField(primary_key=True, default=uuid.uuid4(), help_text="Unique ID for this particular Account")
-    accntInfo = models.JSONField()
+    # accntInfo = models.JSONField(null=True)
 
     class Meta:
         ordering = ['email', 'accntType', 'name']
