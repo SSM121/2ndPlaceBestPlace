@@ -19,6 +19,10 @@ def forgotUser(request):
     return render(request, 'parkingGenie/forgotUser.html')
 
 
+def forgotPassword(request):
+    return render(request, 'parkingGenie/forgotPassword.html')
+
+
 def dashBoard(request):
 
     return render(request, 'parkingGenie/dashBoard.html')
