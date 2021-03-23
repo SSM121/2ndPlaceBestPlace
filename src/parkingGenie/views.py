@@ -1,5 +1,8 @@
+from django.contrib.auth import authenticate
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Account
+from django.http import HttpResponse
+
 
 def index(request):
     return render(request, 'parkingGenie/index.html')
@@ -7,15 +10,27 @@ def index(request):
 
 def logIn(request):
     if request.method == "POST":
-        request.session['userEmail'] = request.user.email
-        request.session['userName'] = request.user.username
-        return redirect('parkingGenie:dashBoard')
+        userName = request.POST.get('userName')
+        password = request.POST.get("userPassword")
+        user = authenticate(username=userName, password=password)
+        if user != None:
+            request.session['userEmail'] = user.email
+            request.session['userName'] = user.username
+            request.session['firstName'] = user.first_name
+            request.session['firstName'] = user.last_name
+            return redirect('parkingGenie:dashBoard')
+        else:  # no matching credentials
+            return render(request, 'parkingGenie/login.html')
     elif request.method == "GET":
         return render(request, 'parkingGenie/login.html')
 
 
 def register(request):
-    return render(request, 'parkingGenie/register.html')
+    if request.method == "POST":
+        return HttpResponse(request)
+        #return redirect('parkingGenie:dashBoard')
+    elif request.method == "GET":
+        return render(request, 'parkingGenie/register.html')
 
 
 def forgotUser(request):

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <title>Parking Genie Register</title>
     <link rel="shortcut icon" type="image/png" href="../../static/parkingGenie/favicon.png">
@@ -9,23 +9,24 @@
 </head>
 <body>
     <div class="wrapper">
-        <form>
+        <form class="row g-3 needs-validation" action="register" method="post">
+            {% csrf_token %}
             <center><h2>Parking Genie</h2></center>
             <div class="mb-3">
-            <label for="exampleInputUser1" class="form-label">Username</label>
-            <input type="email" class="form-control" id="exampleInputUser1" aria-describedby="emailHelp">
+            <label for="userName" class="form-label">Username</label>
+            <input type="text" class="form-control" id="userName"  value="{{name}}">
           </div>
           <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">Email address</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+            <label for="userEmail" class="form-label">Email address</label>
+            <input type="email" class="form-control" id="userEmail" value="{{email}}">
           </div>
           <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label">Password</label>
-            <input type="password" class="form-control" id="exampleInputPassword1">
+            <label for="userPassword" class="form-label">Password</label>
+            <input type="password" class="form-control" id="userPassword" value="{{password1}}">
           </div>
             <div class="mb-3">
             <label for="exampleInputPasswordConfirm1" class="form-label">Confirm Password</label>
-            <input type="password" class="form-control" id="exampleInputPasswordConfirm1">
+            <input type="password" class="form-control" id="exampleInputPasswordConfirm1" value="{{password2}}">
           </div>
             <div class="mb-3">
                 <label>Account Type</label>
@@ -49,7 +50,7 @@
               </label>
             </div>
             <br>
-                    <a class="btn btn-primary" href="dashBoard" role="button">Create Account</a>
+                    <button class="btn btn-primary" href="dashBoard" type="submit">Create Account</button>
             <br>
             <br>
             <center><a href="login">Already Have an Account?</a></center>

@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,14 +15,13 @@
             <center><h2>Parking Genie</h2></center>
 
             <div class="mb-3">
-                <label for="userEmail" class="form-label">Email address</label>
-                <input type="email" class="form-control" id="userEmail" placeholder="name@example.com" value="{{ userName }}">
-                <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                <label for="userName" class="form-label">User Name</label>
+                <input type="text" class="form-control" id="userName" name="userName"  value="{{ userName }}">
             </div>
 
             <div class="mb-3">
                 <label for="userPassword" class="form-label">Password</label>
-                <input type="password" class="form-control" id="userPassword">
+                <input type="password" class="form-control" id="userPassword" name="userPassword" value="{{ password }}">
             </div>
 
             <button type="submit" value="login" class="btn btn-primary">Log in</button>
