@@ -1,7 +1,6 @@
 from django.contrib.auth import authenticate
+from django.contrib.auth.models import User
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Account
-from django.http import HttpResponse
 
 
 def index(request):
@@ -13,7 +12,7 @@ def logIn(request):
         userName = request.POST.get('userName')
         password = request.POST.get("userPassword")
         user = authenticate(username=userName, password=password)
-        if user != None:
+        if user != None:  # found a pair of matching credentials
             request.session['userEmail'] = user.email
             request.session['userName'] = user.username
             request.session['firstName'] = user.first_name
@@ -27,8 +26,24 @@ def logIn(request):
 
 def register(request):
     if request.method == "POST":
-        return HttpResponse(request)
-        #return redirect('parkingGenie:dashBoard')
+        userName = request.POST.get('userName')
+        password1 = request.POST.get("userPassword1")
+        password2 = request.POST.get("userPassword2")
+        userEmail = request.POST.get("userEmail")
+        userFirst = request.POST.get("userFirst")
+        userLast = request.POST.get("userLast")
+        if password1 == password2:
+            user = User.objects.create_user(userFirst, userEmail, password1)
+            user.username = userName
+            user.last_name = userLast
+            # Set session tokens
+            request.session['userEmail'] = user.email
+            request.session['userName'] = user.username
+            request.session['firstName'] = user.first_name
+            request.session['firstName'] = user.last_name
+            return redirect('parkingGenie:dashBoard')  # send the new user to the dash board
+        else:  # passwords dont match
+            return render(request, 'parkingGenie/register.html')
     elif request.method == "GET":
         return render(request, 'parkingGenie/register.html')
 
