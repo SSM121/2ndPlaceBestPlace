@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Parking Genie Template</title>
+    <link rel="shortcut icon" type="image/png" href="../../static/parkingGenie/favicon.png">
+    <link rel="stylesheet" href="../../static/parkingGenie/main.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script></head>
+<body>
+    <h1>Event: {{eventInfo.name}}</h1>
+    <h2>Date: {{eventInfo.date}}</h2>
+    <h2>Time: {{eventInfo.startTime}}</h2>
+    <div class="container">
+        <div class="row">
+            <div class="col col-8">
+                <ul>
+                    {% for Lot in lotList %}
+                        <li>
+                            <div>
+                                <h1> <a> Location: {{Lot.address}} </a></h1>
+                                <h2> Open spots: {{Lot.openSpots}} </h2>
+                                <h2> Price: {{Lot.price}} </h2>
+                                {% if Lot.hasTailGate %}
+                                    <h3> Tail gate spots available </h3>
+                                {% else %}
+                                    <h3> No Tail gate spots available </h3>
+                                {% endif %}
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="col col-4">
+                <div>
+                    <h2> Sort </h2>
+                    <form id="sort_form">
+                        <input type="radio" id="lowToHighPrice" name="sort" value="lowToHighPrice" checked>
+                        <label for="lowToHighPrice">Price low to high</label><br>
+                        <input type="radio" id="highToLowPrice" name="sort" value="highToLowPrice">
+                        <label for="highToLowPrice">Price high to low</label><br>
+                        <input type="radio" id="lowToHighDistance" name="sort" value="lowToHighDistance">
+                        <label for="lowToHighDistance">Shortest Distance</label><br>
+                        <input type="radio" id="highToLowDistance" name="sort" value="highToLowDistance">
+                        <label for="highToLowDistance">Longest Distance</label><br>
+                    </form>
+                </div>
+                <div>
+                    <h2> Tail gate preference </h2>
+                    <form id="tailgate_filter">
+                        <input type="radio" id="anyTailgate" name="filter" value="anyTailgate" checked>
+                        <label for="anyTailgate">Any</label><br>
+                        <input type="radio" id="hasTailgate" name="filter" value="hasTailgate">
+                        <label for="hasTailgate">Tailgate available</label><br>
+                        <input type="radio" id="noTailgate" name="filter" value="noTailgate">
+                        <label for="noTailgate"> Tailgate unavailable</label><br>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
