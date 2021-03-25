@@ -54,7 +54,7 @@ class Account(AbstractBaseUser):
                + ". The email attatched to the account is " + self.email.__str__()
 
     def get_absolute_url(self):  # Not currently implemented Spencer Clemens working through a tutorial
-        """ Returns the url to access a detailed recored of an account"""
+        """ Returns the url to access a detailed record of an account"""
         return reverse('account-detail', args=[str(self.email)])
 
 
