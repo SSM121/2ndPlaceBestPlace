@@ -139,27 +139,31 @@ def lotSearch(request, event_id):
     #   address: string
     #   price: int
     #   hasTailGate: bool
+    #   distance in miles: int
     # }
     lotList.append({
         "lotID": 0,
         "openSpots": 69,
         "address": "dummy address 1",
         "price": 20,
-        "hasTailGate": True
+        "hasTailGate": True,
+        "distance": 4
     })
     lotList.append({
         "lotID": 1,
         "openSpots": 420,
         "address": "dummy address 2",
-        "price": 20,
-        "hasTailGate": False
+        "price": 10,
+        "hasTailGate": False,
+        "distance": 1
     })
     lotList.append({
         "lotID": 2,
         "openSpots": 42,
         "address": "dummy address 3",
         "price": 25,
-        "hasTailGate": True
+        "hasTailGate": True,
+        "distance": 5
     })
     context = {
         "eventInfo": eventInfo,
