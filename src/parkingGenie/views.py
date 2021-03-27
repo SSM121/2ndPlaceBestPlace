@@ -34,10 +34,16 @@ def register(request):
         userEmail = request.POST.get("userEmail")
         userFirst = request.POST.get("userFirst")
         userLast = request.POST.get("userLast")
-        if password1 == password2:
+        userType = request.POST.get("userType")
+        terms = request.POST.get("terms")
+        deals = request.POST.get("deals")
+        if password1 == password2 and terms == "checked":
             user = User.objects.create_user(userFirst, userEmail, password1)
             user.username = userName
             user.last_name = userLast
+            # user.userType = userType  # Commented out because user doesnt have the needed attribute
+            # user.deals = deals  # Commented out because user doesnt have the needed attribute
+
             # Set session tokens
             request.session['userEmail'] = user.email
             request.session['userName'] = user.username
