@@ -1,6 +1,7 @@
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib import messages
 
 
 def index(request):
@@ -16,7 +17,7 @@ def logIn(request):
             request.session['userEmail'] = user.email
             request.session['userName'] = user.username
             request.session['firstName'] = user.first_name
-            request.session['firstName'] = user.last_name
+            request.session['lastName'] = user.last_name
             return redirect('parkingGenie:dashBoard')
         else:  # no matching credentials
             return render(request, 'parkingGenie/login.html')
@@ -27,9 +28,11 @@ def logIn(request):
 def register(request):
     if request.method == "POST":
         userName = request.POST.get('userName')
+        #TODO: create error message if username is taken or if username is ""
         password1 = request.POST.get("userPassword1")
         password2 = request.POST.get("userPassword2")
         userEmail = request.POST.get("userEmail")
+        #TODO: create error message if email is in use or if email is ""
         userFirst = request.POST.get("userFirst")
         userLast = request.POST.get("userLast")
         if password1 == password2:
@@ -40,9 +43,10 @@ def register(request):
             request.session['userEmail'] = user.email
             request.session['userName'] = user.username
             request.session['firstName'] = user.first_name
-            request.session['firstName'] = user.last_name
+            request.session['lastName'] = user.last_name
             return redirect('parkingGenie:dashBoard')  # send the new user to the dash board
         else:  # passwords dont match
+            messages.add_message(request, messages.ERROR, 'Passwords do not match')
             return render(request, 'parkingGenie/register.html')
     elif request.method == "GET":
         return render(request, 'parkingGenie/register.html')
