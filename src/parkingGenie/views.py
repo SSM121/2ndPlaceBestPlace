@@ -31,17 +31,17 @@ def register(request):
         userName = request.POST.get('userName')
         #TODO: create error message if username is taken or if username is ""
        # if User.objects.filter(username=userName).exists():
-        if True:
-            messages.add_message(request, messages.ERROR, "Username is already in use")
-            errors += 1
+        # if True:
+        #     messages.add_message(request, messages.ERROR, "Username is already in use")
+        #     errors += 1
         password1 = request.POST.get("userPassword1")
         password2 = request.POST.get("userPassword2")
         userEmail = request.POST.get("userEmail")
         #TODO: create error message if email is in use or if email is ""
         #if User.objects.filter(email=userEmail).exists():
-        if True:
-            messages.add_message(request, messages.ERROR, "Email is already in use")
-            errors += 1
+        # if True:
+        #     messages.add_message(request, messages.ERROR, "Email is already in use")
+        #     errors += 1
         userFirst = request.POST.get("userFirst")
         userLast = request.POST.get("userLast")
         if password1 != password2:
