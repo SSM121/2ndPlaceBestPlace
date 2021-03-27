@@ -26,16 +26,30 @@ def logIn(request):
 
 
 def register(request):
+    errors = 0
     if request.method == "POST":
         userName = request.POST.get('userName')
         #TODO: create error message if username is taken or if username is ""
+       # if User.objects.filter(username=userName).exists():
+        if True:
+            messages.add_message(request, messages.ERROR, "Username is already in use")
+            errors += 1
         password1 = request.POST.get("userPassword1")
         password2 = request.POST.get("userPassword2")
         userEmail = request.POST.get("userEmail")
         #TODO: create error message if email is in use or if email is ""
+        #if User.objects.filter(email=userEmail).exists():
+        if True:
+            messages.add_message(request, messages.ERROR, "Email is already in use")
+            errors += 1
         userFirst = request.POST.get("userFirst")
         userLast = request.POST.get("userLast")
-        if password1 == password2:
+        if password1 != password2:
+            messages.add_message(request, messages.ERROR, 'Passwords do not match')
+            errors += 1
+        if(errors > 0):
+            return render(request, 'parkingGenie/register.html')
+        else:  #no errors
             user = User.objects.create_user(userFirst, userEmail, password1)
             user.username = userName
             user.last_name = userLast
@@ -44,10 +58,7 @@ def register(request):
             request.session['userName'] = user.username
             request.session['firstName'] = user.first_name
             request.session['lastName'] = user.last_name
-            return redirect('parkingGenie:dashBoard')  # send the new user to the dash board
-        else:  # passwords dont match
-            messages.add_message(request, messages.ERROR, 'Passwords do not match')
-            return render(request, 'parkingGenie/register.html')
+            return redirect('parkingGenie:dashBoard')  # send the new user to the dash board   
     elif request.method == "GET":
         return render(request, 'parkingGenie/register.html')
 
