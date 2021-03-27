@@ -20,7 +20,7 @@ def logIn(request):
             request.session['firstName'] = user.last_name
             return redirect('parkingGenie:dashBoard')
         else:  # no matching credentials
-            messages.add_message(request, messages.error, "Username or Password are incorrect")
+            messages.add_message(request, messages.ERROR, "Username or Password are incorrect")
             return render(request, 'parkingGenie/login.html')
     elif request.method == "GET":
         return render(request, 'parkingGenie/login.html')
