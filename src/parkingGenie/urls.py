@@ -15,5 +15,6 @@ urlpatterns = [
     path('manageAccount', views.manageAccount, name='manageAccount'),
     path('events', views.searchEvents, name='searchEvents'),
     path('event/<int:event_id>', views.lotSearch, name='lotSearch'),
+    path('event/checkOut', views.checkOut, name='checkOut'),
     path('qrViewer', views.qrViewer, name='qrViewer'),
 ]

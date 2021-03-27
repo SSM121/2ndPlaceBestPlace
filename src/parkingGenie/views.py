@@ -191,3 +191,13 @@ def qrViewer(request):
     # Render the view
     return render(request, 'parkingGenie/qrViewer.html', context)
 
+
+def checkOut(request):
+    lotID = request.GET.get("lot")
+    eventName = request.GET.get("event")
+    context = {
+        "lotId": lotID,
+        "eventName": eventName,  # I think this will needed be substituted later with an event ID
+    }
+    return render(request, 'parkingGenie/checkOut.html', context)
+
