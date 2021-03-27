@@ -39,10 +39,11 @@ class ParkingLot(models.Model):
         # return [self.name, self.address]  # If we find this works better for our purposes.
 
     def availSpots(self):   # Get the number of available normal parking spots
-        return parking
+        return self.parking
 
     def availTailgate(self):    # Get the number of available tailgate parking spots
-        return tailgate
+        return self.tailgate
 
     def isFull(self):   # True if parking lot has no more available parking spots
-        return parking == 0 and tailgate == 0
+        return self.parking == 0 and self.tailgate == 0
+
