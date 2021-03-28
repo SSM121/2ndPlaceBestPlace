@@ -4,7 +4,7 @@ from django.contrib.auth.models import Group
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from django.core.exceptions import ValidationError
-from parkingGenie.models import Account
+from .models import Account, userType
 
 
 class UserCreationForm(forms.ModelForm):
@@ -49,36 +49,22 @@ class UserChangeForm(forms.ModelForm):
 
 
 class UserAdmin(BaseUserAdmin):
-    # The forms to add and change user instances
-    form = UserChangeForm
-    add_form = UserCreationForm
-
-    # The fields to be used in displaying the User model.
-    # These override the definitions on the base UserAdmin
-    # that reference specific fields on auth.User.
-    list_display = ('name', 'email', 'is_admin')
-    list_filter = ('is_admin',)
     fieldsets = (
-        (None, {'fields': ('email', 'password')}),
-        ('Personal info', {'fields': ('name',)}),
-        ('Permissions', {'fields': ('is_admin',)}),
+        (
+            None,
+            {
+                'classes': ('wide',),
+                'fields': ('email', 'password1', 'password2')
+            }
+        ),
     )
-    # add_fieldsets is not a standard ModelAdmin attribute. UserAdmin
-    # overrides get_fieldsets to use this attribute when creating a user.
-    add_fieldsets = (
-        (None, {
-            'classes': ('wide',),
-            'fields': ('name', 'email', 'password1', 'password2'),
-        }),
-    )
-    search_fields = ('email',)
+
+    list_display = ('email', 'name', 'accountType')
+    list_filter = ('accountType',)
+    search_fields = ('email', 'name')
     ordering = ('email',)
-    filter_horizontal = ()
-
-    # Now register the new UserAdmin...
+    filter_horizontal = ('groups', 'user_permissions')
 
 
-admin.site.register(MyUser, UserAdmin)
-# ... and, since we're not using Django's built-in permissions,
-# unregister the Group model from admin.
-admin.site.unregister(Group)
+admin.site.register(Account, UserAdmin)
+admin.site.register(userType)

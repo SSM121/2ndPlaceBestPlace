@@ -1,6 +1,7 @@
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect, get_object_or_404
+from .models import Account, accountType
 
 
 def index(request):
@@ -9,15 +10,15 @@ def index(request):
 
 def logIn(request):
     if request.method == "POST":
-        userName = request.POST.get('userName')
-        password = request.POST.get("userPassword")
-        user = authenticate(username=userName, password=password)
-        if user != None:  # found a pair of matching credentials
-            request.session['userEmail'] = user.email
-            request.session['userName'] = user.username
-            request.session['firstName'] = user.first_name
-            request.session['firstName'] = user.last_name
-            return redirect('parkingGenie:dashBoard')
+        email = request.POST.get('email')
+        password = request.POST.get("password")
+        user = authenticate(request, email=email, password=password)
+
+        if user is not None:  # found a pair of matching credentials
+            login(request, user)
+            # type_obj = userType.objects.get(user=user) # Used to redirect the different user types
+            if user.is_authenticated:
+                return redirect('parkingGenie:dashBoard')
         else:  # no matching credentials
             return render(request, 'parkingGenie/login.html')
     elif request.method == "GET":
@@ -27,20 +28,15 @@ def logIn(request):
 def register(request):
     if request.method == "POST":
         userName = request.POST.get('userName')
+        userEmail = request.POST.get("userEmail")
         password1 = request.POST.get("userPassword1")
         password2 = request.POST.get("userPassword2")
-        userEmail = request.POST.get("userEmail")
-        userFirst = request.POST.get("userFirst")
-        userLast = request.POST.get("userLast")
         if password1 == password2:
-            user = User.objects.create_user(userFirst, userEmail, password1)
-            user.username = userName
-            user.last_name = userLast
+            user = Account.objects.create_user(userName, userEmail, accountType, password1)
+
             # Set session tokens
             request.session['userEmail'] = user.email
-            request.session['userName'] = user.username
-            request.session['firstName'] = user.first_name
-            request.session['firstName'] = user.last_name
+            request.session['userName'] = user.name
             return redirect('parkingGenie:dashBoard')  # send the new user to the dash board
         else:  # passwords dont match
             return render(request, 'parkingGenie/register.html')
