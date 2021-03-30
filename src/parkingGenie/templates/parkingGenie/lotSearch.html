@@ -18,20 +18,51 @@
             <div class="col col-8">
                 <ul id="lotList">
                     {% for Lot in lotList %}
-                        <li data-distance={{Lot.distance}} data-price={{Lot.price}} {% if Lot.hasTailGate%} data-tailgate {%else%} {%endif%}>
-                            <div>
-                                <h1> <a> Location: {{Lot.address}} </a></h1>
-                                <h1> Distance: {{Lot.distance}} Miles</h1>
-                                <h2> Open spots: {{Lot.openSpots}} </h2>
-                                <h2> Price: ${{Lot.price}} </h2>
 
-                                {% if Lot.hasTailGate %}
-                                    <h3> Tail gate spots available </h3>
-                                {% else %}
-                                    <h3> No Tail gate spots available </h3>
-                                {% endif %}
+                    <li data-distance={{Lot.distance}} data-price={{Lot.price}} {% if Lot.hasTailGate%} data-tailgate {%else%} {%endif%}>
+                        <div class="card" style="width: 18rem;">
+
+<!--                                <div class="card-body">-->
+<!--                                    <h5 class="card-title"><a> Location: {{Lot.address}} </a></h5>-->
+<!--                                    <p class="card-text">Info about the lot</p>-->
+<!--                                </div>-->
+<!--                                <ul class="list-group list-group-flush">-->
+<!--                                    <li class="list-group-item">Distance: {{Lot.distance}} Miles</li>-->
+<!--                                    <li class="list-group-item">Price: ${{Lot.price}}</li>-->
+<!--                                    <li class="list-group-item">Open spots: {{Lot.openSpots}}</li>-->
+<!--                                    <li class="list-group-item">-->
+<!--                                        {% if Lot.hasTailGate %}-->
+<!--                                            Tail gate spots available-->
+<!--                                        {% else %}-->
+<!--                                            No Tail gate spots available-->
+<!--                                        {% endif %}-->
+<!--                                    </li>-->
+<!--                                </ul>-->
+<!--                                <div class="card-body">-->
+<!--                                    <a href="#" class="card-link">Card link</a>-->
+<!--                                    <a href="#" class="card-link">Another link</a>-->
+<!--                                </div>-->
+
+                            <div class="card-body">
+                                <h5 class="card-title"><a> Location: {{Lot.address}} </a></h5>
+                                <h5>Price: ${{Lot.price}}</h5>
                             </div>
-                        </li>
+                            <ul class="list-group list-group-flush">
+
+                                <h5> Distance: {{Lot.distance}} Miles</h5>
+                                <h5> Open spots: {{Lot.openSpots}} </h5>
+                                <h5> Open spots: {{Lot.openSpots}} </h5>
+                                {% if Lot.hasTailGate %}
+                                    <h5> Tail gate spots available </h5>
+                                {% else %}
+                                    <h5> No Tail gate spots available </h5>
+                                {% endif %}
+                            </ul>
+                            <div class="card-body">
+                                <a class="btn btn-primary" href="checkOut?lot={{Lot.lotID}}&event={{eventInfo.name}}" role="button">Purchase</a>
+                            </div>
+                        </div>
+                    </li>
                     {% endfor %}
                 </ul>
             </div>

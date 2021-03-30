@@ -1,7 +1,7 @@
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
-from django.shortcuts import render, redirect, get_object_or_404
-
+from django.shortcuts import render, redirect
+from qr_code.qrcode.utils import QRCodeOptions
 
 def index(request):
     return render(request, 'parkingGenie/index.html')
@@ -77,9 +77,10 @@ def manageAccount(request):
 def addEvent(request):
     return render(request, 'parkingGenie/addEvent.html')
 
-  
+
 def addLot(request):
     return render(request, 'parkingGenie/addLot.html')
+
 
 def searchEvents(request):
     # hear we will get info from the database but for now it will be poplulated with some dummy info
@@ -125,6 +126,7 @@ def searchEvents(request):
         'eventList': eventList,
     }
     return render(request, 'parkingGenie/events.html', context)
+
 
 def lotSearch(request, event_id):
     #dictionary for storing event info
@@ -176,4 +178,26 @@ def lotSearch(request, event_id):
         "lotList": lotList
     }
     return render(request, 'parkingGenie/lotSearch.html', context)
+
+
+def qrViewer(request):
+    # Build context for rendering QR codes.
+    context = {
+        "my_options": QRCodeOptions(size='m', border=0, error_correction='s'),
+        "qrCode": "http://127.0.0.1:8000/qrViewer",  # Will need to be replaced with dynamic QR code generator
+        "userName": request.session.get("userName")
+    }
+
+    # Render the view
+    return render(request, 'parkingGenie/qrViewer.html', context)
+
+
+def checkOut(request):
+    lotID = request.GET.get("lot")
+    eventName = request.GET.get("event")
+    context = {
+        "lotId": lotID,
+        "eventName": eventName,  # I think this will needed be substituted later with an event ID
+    }
+    return render(request, 'parkingGenie/checkOut.html', context)
 
