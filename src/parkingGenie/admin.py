@@ -29,15 +29,7 @@ class UserCreationForm(forms.ModelForm):
             user.save()
         return user
 
-# Commented all of this out becasue it bricks the server
-"""
-Error raised 
-  File "C:src\parkingGenie\admin.py", line 33, in <module>
-    class UserChangeForm(forms.ModelForm):
-  File "C:site-packages\django\forms\models.py", line 268, in __new__
-    raise FieldError(message)
-django.core.exceptions.FieldError: Unknown field(s) (is_admin, is_active) specified for Account
-"""
+
 class UserChangeForm(forms.ModelForm):
     """
     A form for updating users. Includes all the fields on
@@ -62,18 +54,18 @@ class UserAdmin(BaseUserAdmin):
         (
             None,
             {
-                'classes': ('wide',),
-                'fields': ('email', 'password1', 'password2')
+                'classes': ['wide',],
+                'fields': ['email', 'password1', 'password2']
             }
         ),
     )
 
-    list_display = ('email', 'name', 'accountType')
-    list_filter = ('accountType',)
-    search_fields = ('email', 'name')
-    ordering = ('email',)
-    filter_horizontal = ('groups', 'user_permissions')
+    # list_display = ['email', 'name', 'accountType']
+    # list_filter = ['accountType',]
+    # search_fields = ['email', 'name']
+    # ordering = ['email',]
+    # filter_horizontal = ['groups', 'user_permissions']
 
 
-admin.site.register(Account, UserAdmin)
+# admin.site.register(Account, UserAdmin)
 # admin.site.register(Account.userType) Bricks the code
