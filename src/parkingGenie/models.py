@@ -157,8 +157,8 @@ class Event(models.Model):
     parking = models.ManyToManyField(ParkingLot, help_text="Parking lots available for this Event")
     address = models.CharField(max_length=100, help_text="Address of the Event")
 
-    # class Meta:
-    #     ordering = (date)
+    class Meta:
+        ordering = ["date"]
 
     def __str__(self):
         return "%s \n %s" % (self.name, self.address)
