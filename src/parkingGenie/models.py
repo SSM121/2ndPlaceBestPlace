@@ -79,7 +79,6 @@ class Account(AbstractBaseUser):
 
 class Customer(models.Model):
      user = models.OneToOneField(Account, on_delete=models.CASCADE)
-
      carMake = models.CharField(max_length=15, help_text="Make of the customers car")
      carModel = models.CharField(max_length=15, help_text="Model of the customers car")
      carColor = models.CharField(max_length=15, help_text="Color of the customers car")
@@ -114,31 +113,34 @@ class Event(models.Model):
 
 class ParkingLot(models.Model):
     # Fields
-     name = models.CharField(max_length=20, help_text="The name of the parking lot")
-     address = models.CharField(max_length=100, help_text="Address of the parking lot")
-     parking = models.IntegerField(help_text="Number of available normal parking spaces")
-     tailgate = models.IntegerField(help_text="Number of available tailgate parking spaces")
-     owner = models.ForeignKey(Owner, on_delete=models.CASCADE, help_text="Owner of the parking lot")
-     event = models.ManyToManyField(Event, help_text="Event(s) that will use this parking lot")
-     date = models.DateField(help_text="Date of the Event")
-     #distance = getDistance()
-     price = models.DecimalField(max_digits=5, decimal_places=2, help_text="Cost of a normal parking spot", default=20.00)
-     tailgatePrice = models.DecimalField(max_digits=5, decimal_places=2, help_text="Cost of a tailgate parking spot", default=30.00)
+    name = models.CharField(max_length=20, help_text="The name of the parking lot")
+    address = models.CharField(max_length=100, help_text="Address of the parking lot")
+    parking = models.IntegerField(help_text="Number of available normal parking spaces")
+    tailgate = models.IntegerField(help_text="Number of available tailgate parking spaces")
+    owner = models.ForeignKey(Owner, on_delete=models.CASCADE, help_text="Owner of the parking lot")
+    event = models.ManyToManyField(Event, help_text="Event(s) that will use this parking lot")
+    date = models.DateField(help_text="Date of the Event")
+    #distance = getDistance()
+    price = models.DecimalField(max_digits=5, decimal_places=2, help_text="Cost of a normal parking spot", default=20.00)
+    tailgatePrice = models.DecimalField(max_digits=5, decimal_places=2, help_text="Cost of a tailgate parking spot", default=30.00)
 
-     def __str__(self):  # Useful for printing out Name and Address of the parking lot
+    class Meta:
+        ordering = ['date', 'price', 'tailgatePrice']
+
+    def __str__(self):  # Useful for printing out Name and Address of the parking lot
          return "%s \n %s" % (self.name, self.address)
          # return [self.name, self.address]  # If we find this works better for our purposes.
 
-     def availSpots(self):   # Get the number of available normal parking spots
+    def availSpots(self):   # Get the number of available normal parking spots
          return self.parking
 
-     def availTailgate(self):    # Get the number of available tailgate parking spots
+    def availTailgate(self):    # Get the number of available tailgate parking spots
          return self.tailgate
 
-     def isFull(self):   # True if parking lot has no more available parking spots
+    def isFull(self):   # True if parking lot has no more available parking spots
          return self.parking == 0 and self.tailgate == 0
 
-     def getDistance(self):
+    def getDistance(self):
          pass
          # Needs integration with Google Maps API to calculate distance from Event. Using self.address and self.event.getAddress()
 
