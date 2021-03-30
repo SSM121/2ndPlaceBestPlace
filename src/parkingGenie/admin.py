@@ -4,7 +4,7 @@ from django.contrib.auth.models import Group
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from django.core.exceptions import ValidationError
-from .models import Account, userType
+from .models import Account
 
 
 class UserCreationForm(forms.ModelForm):
@@ -29,23 +29,32 @@ class UserCreationForm(forms.ModelForm):
             user.save()
         return user
 
-
-class UserChangeForm(forms.ModelForm):
-    """A form for updating users. Includes all the fields on
-        the user, but replaces the password field with admin's
-        password hash display field.
-        """
-    password = ReadOnlyPasswordHashField()
-
-    class Meta:
-        model = Account
-        fields = ('email', 'password', 'name', 'is_active', 'is_admin')
-
-    def clean_password(self):
-        # Regardless of what the user provides, return the initial value.
-        # This is done here, rather than on the field, because the
-        # field does not have access to the initial value
-        return self.initial["password"]
+# Commented all of this out becasue it bricks the server
+"""
+Error raised 
+  File "C:src\parkingGenie\admin.py", line 33, in <module>
+    class UserChangeForm(forms.ModelForm):
+  File "C:site-packages\django\forms\models.py", line 268, in __new__
+    raise FieldError(message)
+django.core.exceptions.FieldError: Unknown field(s) (is_admin, is_active) specified for Account
+"""
+# class UserChangeForm(forms.ModelForm):
+#     """
+#     A form for updating users. Includes all the fields on
+#     the user, but replaces the password field with admin's
+#     password hash display field.
+#     """
+#     password = ReadOnlyPasswordHashField()
+#
+#     class Meta:
+#         model = Account
+#         fields = ('email', 'password', 'name', 'is_active', 'is_admin')
+#
+#     def clean_password(self):
+#         # Regardless of what the user provides, return the initial value.
+#         # This is done here, rather than on the field, because the
+#         # field does not have access to the initial value
+#         return self.initial["password"]
 
 
 class UserAdmin(BaseUserAdmin):
@@ -67,4 +76,4 @@ class UserAdmin(BaseUserAdmin):
 
 
 admin.site.register(Account, UserAdmin)
-admin.site.register(userType)
+# admin.site.register(Account.userType) Bricks the code
