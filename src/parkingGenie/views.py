@@ -2,6 +2,7 @@ from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Account, accountType
+from django.contrib import messages
 from qr_code.qrcode.utils import QRCodeOptions
 
 
@@ -21,6 +22,7 @@ def logIn(request):
             if user.is_authenticated:
                 return redirect('parkingGenie:dashBoard')
         else:  # no matching credentials
+            messages.add_message(request, messages.ERROR, "Username or Password are incorrect")
             return render(request, 'parkingGenie/login.html')
     elif request.method == "GET":
         return render(request, 'parkingGenie/login.html')
