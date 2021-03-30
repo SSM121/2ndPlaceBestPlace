@@ -51,7 +51,7 @@ class Account(AbstractBaseUser):
         (4, 'attendant'),
     )
 
-    userType = models.PositiveSmallIntegerField(choices=USER_TYPE_CHOICES)
+    userType = models.PositiveSmallIntegerField(choices=USER_TYPE_CHOICES, default=1)
     name = models.CharField(max_length=40, help_text='Name of the user')
     email = models.EmailField(max_length=254, unique=True, help_text='Email of the user')
     password = models.CharField(max_length=15, help_text="The users password")
@@ -164,8 +164,8 @@ class ParkingLot(models.Model):
      event = models.ManyToManyField(Event, help_text="Event(s) that will use this parking lot")
      date = models.DateField(help_text="Date of the Event")
      #distance = getDistance()  # IDK how to fix this but it needs an argument of "Self"
-     price = models.DecimalField(max_digits=3, decimal_places=2, help_text="Cost of a normal parking spot")
-     tailgatePrice = models.DecimalField(max_digits=3, decimal_places=2, help_text="Cost of a tailgate parking spot")
+     price = models.DecimalField(max_digits=5, decimal_places=2, help_text="Cost of a normal parking spot", default=20.00)
+     tailgatePrice = models.DecimalField(max_digits=5, decimal_places=2, help_text="Cost of a tailgate parking spot", default=30.00)
 
 
 
