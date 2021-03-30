@@ -112,6 +112,25 @@ class Attendant(models.Model):
     class Meta:
         permissions = ['attendant']
 
+class Event(models.Model):
+    name = models.CharField(max_length=50, help_text="The long name of the event, with spaces")
+    shortName = models.CharField(max_length=15, help_text="Short event name, used when creating attendant 'email' addresses")
+    date = models.DateField
+    manager = models.ForeignKey(Manager, help_text="Manager who created the Event", on_delete=models.CASCADE)
+    address = models.CharField(max_length=100, help_text="Address of the Event")
+
+    class Meta:
+        ordering = ["date"]
+
+    def __str__(self):
+        return "%s \n %s" % (self.name, self.address)
+
+    def getShortName(self):
+        return self.shortName
+
+    def getAddress(self):
+        return self.address
+
 
 class ParkingLot(models.Model):
 
@@ -142,29 +161,11 @@ class ParkingLot(models.Model):
     parking = models.IntegerField(help_text="Number of available normal parking spaces")
     tailgate = models.IntegerField(help_text="Number of available tailgate parking spaces")
     owner = models.ForeignKey(Owner, on_delete=models.CASCADE, help_text="Owner of the parking lot")
-    #event = models.ManyToManyField(Event, help_text="Event(s) that will use this parking lot")  # Had to comment this out becasue it bricks the code.
+    event = models.ManyToManyField(Event, help_text="Event(s) that will use this parking lot")  # Had to comment this out becasue it bricks the code.
     date = models.DateField(help_text="Date of the Event")
     #distance = getDistance()  # IDK how to fix this but it needs an argument of "Self"
     price = models.DecimalField(max_digits=3, decimal_places=2, help_text="Cost of a normal parking spot")
     tailgatePrice = models.DecimalField(max_digits=3, decimal_places=2, help_text="Cost of a tailgate parking spot")
 
 
-class Event(models.Model):
-    name = models.CharField(max_length=50, help_text="The long name of the event, with spaces")
-    shortName = models.CharField(max_length=15, help_text="Short event name, used when creating attendant 'email' addresses")
-    date = models.DateField
-    manager = models.ForeignKey(Manager, help_text="Manager who created the Event", on_delete=models.CASCADE)
-    parking = models.ManyToManyField(ParkingLot, help_text="Parking lots available for this Event")
-    address = models.CharField(max_length=100, help_text="Address of the Event")
 
-    class Meta:
-        ordering = ["date"]
-
-    def __str__(self):
-        return "%s \n %s" % (self.name, self.address)
-
-    def getShortName(self):
-        return self.shortName
-
-    def getAddress(self):
-        return self.address
