@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+{% load static %}
+{% load qr_code %}
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Qr code tests</title>
+</head>
+  <body>
+    <div class="wrapper">
+
+      <h1>QR Code</h1>
+      <h2>{{ userName }}</h2>
+      <figure class="figure">
+        {% qr_from_text qrCode options=my_options %}
+      </figure>
+
+    </div>
+  </body>
+</html>
