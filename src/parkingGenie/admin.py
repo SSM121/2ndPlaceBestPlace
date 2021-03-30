@@ -4,7 +4,7 @@ from django.contrib.auth.models import Group
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from django.core.exceptions import ValidationError
-from .models import Account
+from .models import Account, Customer, Owner, Manager, Attendant
 
 
 class UserCreationForm(forms.ModelForm):
@@ -51,21 +51,31 @@ class UserChangeForm(forms.ModelForm):
 
 class UserAdmin(BaseUserAdmin):
     fieldsets = (
+        (None, { 'fields': ('email', 'password', 'name')}),
+        ('Permissions', {'fields': (
+            'groups',
+            'user_permissions',
+        )}),
+    )
+    add_fieldsets = (
         (
             None,
             {
-                'classes': ['wide',],
+                'classes': ['wide', ],
                 'fields': ['email', 'password1', 'password2']
             }
         ),
     )
 
-    # list_display = ['email', 'name', 'accountType']
-    # list_filter = ['accountType',]
-    # search_fields = ['email', 'name']
-    # ordering = ['email',]
-    # filter_horizontal = ['groups', 'user_permissions']
+    list_display = ['email', 'name', 'userType']
+    list_filter = ['userType', ]
+    search_fields = ['email', 'name']
+    ordering = ['email', ]
+    filter_horizontal = ['groups', 'user_permissions']
 
 
-# admin.site.register(Account, UserAdmin)
-# admin.site.register(Account.userType) Bricks the code
+admin.site.register(Account, UserAdmin)
+admin.site.register(Customer)
+admin.site.register(Owner)
+admin.site.register(Manager)
+admin.site.register(Attendant)

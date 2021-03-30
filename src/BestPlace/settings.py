@@ -101,7 +101,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-Auth_USER_MODEL = 'parkingGenie.Account'
+AUTH_USER_MODEL = 'parkingGenie.Account'
 
 
 # Internationalization

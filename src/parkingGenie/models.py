@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import (BaseUserManager, AbstractBaseUser)
+from django.contrib.auth.models import (BaseUserManager, AbstractBaseUser, PermissionsMixin)
 from django.urls import reverse  # used to generate URLs by reversing the URL patterns
 import uuid  # required for Accounts to have a unique instance
 
@@ -42,7 +42,7 @@ class AccountManager(BaseUserManager):
         return user
 
 
-class Account(AbstractBaseUser):
+class Account(AbstractBaseUser, PermissionsMixin):
     # Fields
     USER_TYPE_CHOICES = (
         (1, 'customer'),

@@ -30,8 +30,7 @@ def logIn(request):
 
 def register(request):
     if request.method == "POST":
-        userName = request.POST.get('userName')
-        userLast = request.POST.get('userLast')
+        userName = request.POST.get('name')
         userEmail = request.POST.get("userEmail")
         password1 = request.POST.get("userPassword1")
         password2 = request.POST.get("userPassword2")
@@ -39,7 +38,7 @@ def register(request):
         terms = request.POST.get("terms")
         deals = request.POST.get("deals")
         if password1 == password2 and terms == "checked":
-            user = User.objects.create_user(userName, userEmail, Account.accountType, password1)
+            user = User.objects.create_user(userName, userEmail, userType, password1)
             user.username = userName
             user.last_name = userLast
             user.userType = userType  # Commented out because user doesnt have the needed attribute
@@ -69,8 +68,8 @@ def dashBoard(request):
 
 def manageAccount(request):
     context = {
-        "userEmail": request.session.get("userEmail"),
-        "userName": request.session.get("userName")
+        "userEmail": request.session.get("email"),
+        "userName": request.session.get("name")
     }
     return render(request, 'parkingGenie/manageAccount.html', context=context)
 
