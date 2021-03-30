@@ -16,9 +16,12 @@ Each member should fork or branch the repo and submit pull or merge requests. Th
 1. Python 3.9 or later
 2. Django 3.1.7 or later
 3. Vanilla Javascript
+4. django-qr-code (uses pip install django-qr-code)
 
 ### Setup instructions
+run pip install django-qr-code
 On first git pull run ```python src/manage.py migrate```
+
 ## Build Instructions
 run ```python src/manage.py runserver```
 ## Unit Testing
