@@ -32,23 +32,21 @@ def register(request):
     if request.method == "POST":
         userName = request.POST.get('userName')
         #TODO: create error message if username is taken
-        if User.objects.filter(username=userName).exists():
+        if authenticate(request, username=userName) is None:
             messages.add_message(request, messages.ERROR, "Username is already in use")
             errors += 1
         password1 = request.POST.get("userPassword1")
         password2 = request.POST.get("userPassword2")
         userEmail = request.POST.get("userEmail")
-        if User.objects.filter(email=userEmail).exists():
+        if authenticate(request, email=userEmail) is None:
             messages.add_message(request, messages.ERROR, "Email is already in use")
             errors += 1
         userFirst = request.POST.get("userFirst")
         userLast = request.POST.get("userLast")
-        terms = request.POST.get("terms")
         deals = request.POST.get("deals")
         if password1 != password2:
             messages.add_message(request, messages.ERROR, 'Passwords do not match')
             errors += 1
-        if terms = 
         if(errors > 0):
             return render(request, 'parkingGenie/register.html')
         else:  #no errors
