@@ -1,7 +1,7 @@
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Account
+from .models import Account, Event
 from django.contrib import messages
 from qr_code.qrcode.utils import QRCodeOptions
 
@@ -91,37 +91,7 @@ def searchEvents(request):
     #   date: date represented as a string
     #   startTime: time as a string
     # }
-    eventList = []
-    eventList.append({
-        "id": 0,
-        "name": "BYU Vs USU",
-        "date": "Nov. 21, 2021",
-        "startTime": "9:00 a.m."
-    })
-    eventList.append({
-        "id": 1,
-        "name": "BYU Vs USU",
-        "date": "Nov. 21, 2021",
-        "startTime": "9:00 a.m."
-    })
-    eventList.append({
-        "id": 2,
-        "name": "USU Vs SDSU",
-        "date": "Oct. 19, 2021",
-        "startTime": "3:00 p.m."
-    })
-    eventList.append({
-        "id": 3,
-        "name": "USU Vs UNlV",
-        "date": "Oct. 20, 2021",
-        "startTime": "3:00 p.m."
-    })
-    eventList.append({
-        "id": 4,
-        "name": "USU Vs U of U",
-        "date": "Oct. 21, 2021",
-        "startTime": "5:00 p.m."
-    })
+    eventList = Event.objects.order_by('date')
     context = {
         'eventList': eventList,
     }
