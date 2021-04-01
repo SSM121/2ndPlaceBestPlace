@@ -31,7 +31,7 @@ def populate_db(apps, schema_editor):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('parkingGenie', '0011_event_date'),
+        ('parkingGenie', '0001_initial'),
     ]
 
     operations = [
