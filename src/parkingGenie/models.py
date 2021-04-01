@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import (BaseUserManager, AbstractBaseUser, PermissionsMixin)
 from django.urls import reverse  # used to generate URLs by reversing the URL patterns
 import uuid  # required for Accounts to have a unique instance
+from django.utils import timezone
 
 
 class AccountManager(BaseUserManager):
@@ -97,7 +98,7 @@ class Manager(models.Model):
 class Event(models.Model):
      name = models.CharField(max_length=50, help_text="The long name of the event, with spaces")
      shortName = models.CharField(max_length=15, help_text="Short event name, used when creating attendant 'email' addresses")
-     date = models.DateField
+     date = models.DateTimeField("Date", default=timezone.now)
      manager = models.ForeignKey(Manager, help_text="Manager who created the Event", on_delete=models.CASCADE)
      address = models.CharField(max_length=100, help_text="Address of the Event")
 
