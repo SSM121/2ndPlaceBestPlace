@@ -38,7 +38,7 @@ def register(request):
         terms = request.POST.get("terms")
         deals = request.POST.get("deals")
         if password1 == password2 and terms == "checked":
-            user = User.objects.create_user(userName, userEmail, userType, password1)
+            user = Account.objects.create_user(userName, userEmail, userType, password1)
             user.username = userName
             user.last_name = userLast
             user.userType = userType  # Commented out because user doesnt have the needed attribute
