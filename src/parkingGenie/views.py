@@ -15,7 +15,6 @@ def logIn(request):
         email = request.POST.get('email')
         password = request.POST.get("password")
         user = authenticate(request, email=email, password=password)
-
         if user is not None:  # found a pair of matching credentials
             login(request, user)
             # type_obj = userType.objects.get(user=user) # Used to redirect the different user types
@@ -29,27 +28,40 @@ def logIn(request):
 
 
 def register(request):
+    errors = 0
     if request.method == "POST":
-        userName = request.POST.get('name')
-        userEmail = request.POST.get("userEmail")
+        userName = request.POST.get('userName')
+        #TODO: create error message if username is taken
+        if authenticate(request, username=userName) is None:
+            messages.add_message(request, messages.ERROR, "Username is already in use")
+            errors += 1
         password1 = request.POST.get("userPassword1")
         password2 = request.POST.get("userPassword2")
-        userType = request.POST.get("userType")
-        terms = request.POST.get("terms")
+        userEmail = request.POST.get("userEmail")
+        if authenticate(request, email=userEmail) is None:
+            messages.add_message(request, messages.ERROR, "Email is already in use")
+            errors += 1
+        userFirst = request.POST.get("userFirst")
+        userLast = request.POST.get("userLast")
         deals = request.POST.get("deals")
-        if password1 == password2 and terms == "checked":
-            user = Account.objects.create_user(userName, userEmail, userType, password1)
+        if password1 != password2:
+            messages.add_message(request, messages.ERROR, 'Passwords do not match')
+            errors += 1
+        if(errors > 0):
+            return render(request, 'parkingGenie/register.html')
+        else:  #no errors
+            user = User.objects.create_user(userFirst, userEmail, password1)
+
             user.username = userName
             user.last_name = userLast
             user.userType = userType  # Commented out because user doesnt have the needed attribute
             user.deals = deals  # Commented out because user doesnt have the needed attribute
-
             # Set session tokens
             request.session['userEmail'] = user.email
-            request.session['userName'] = user.name
-            return redirect('parkingGenie:dashBoard')  # send the new user to the dash board
-        else:  # passwords dont match
-            return render(request, 'parkingGenie/register.html')
+            request.session['userName'] = user.username
+            request.session['firstName'] = user.first_name
+            request.session['lastName'] = user.last_name
+            return redirect('parkingGenie:dashBoard')  # send the new user to the dash board   
     elif request.method == "GET":
         return render(request, 'parkingGenie/register.html')
 

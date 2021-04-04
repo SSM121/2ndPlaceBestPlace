@@ -14,29 +14,36 @@
         <form class="row g-3 needs-validation" action="register" method="post">
             {% csrf_token %}
             <center><h2>Parking Genie</h2></center>
+            {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                <p {% if message.tags %} class="{{ message.tags }} alert-danger" style="text-align: center;" {% endif %}>{{ message }}</p>
+                {% endfor %}
+            </div>
+            {% endif %} 
             <div class="mb-3">
             <label for="userName" class="form-label">Username</label>
-            <input type="text" class="form-control" id="userName" name="userName"  value="{{name}}">
+            <input type="text" class="form-control" id="userName" name="userName"  value="{{name}}" required>
             </div>
             <div class="mb-3">
                 <label for="userEmail" class="form-label">Email address</label>
-                <input type="email" class="form-control" id="userEmail" name="userEmail" value="{{email}}">
+                <input type="email" class="form-control" id="userEmail" name="userEmail" value="{{email}}" required>
             </div>
             <div class="mb-3">
                 <label for="userFirst" class="form-label">First Name</label>
-                <input type="text" class="form-control" id="userFirst" name="userFirst" value="{{userFirst}}">
+                <input type="text" class="form-control" id="userFirst" name="userFirst" value="{{userFirst}}" required>
             </div>
             <div class="mb-3">
                 <label for="userLast" class="form-label">Last Name</label>
-                <input type="text" class="form-control" id="userLast" name="userLast" value= "{{userLast}}">
+                <input type="text" class="form-control" id="userLast" name="userLast" value= "{{userLast}}" required>
             </div>
             <div class="mb-3">
                 <label for="userPassword" class="form-label">Password</label>
-                <input type="password" class="form-control" id="userPassword" name="userPassword1" value="{{password1}}">
+                <input type="password" class="form-control" id="userPassword" name="userPassword1" value="{{password1}}" required>
             </div>
             <div class="mb-3">
                 <label for="exampleInputPasswordConfirm1" class="form-label">Confirm Password</label>
-                <input type="password" class="form-control" id="exampleInputPasswordConfirm1" name="userPassword2" value="{{password2}}">
+                <input type="password" class="form-control" id="exampleInputPasswordConfirm1" name="userPassword2" value="{{password2}}" required>
             </div>
             <div class="mb-3">
                 <label>Account Type</label>
@@ -48,7 +55,7 @@
                 </select>
             </div>
             <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="checked" id="flexCheckDefault" name="terms">
+                <input class="form-check-input" type="checkbox" value="checked" id="flexCheckDefault" name="terms" required>
                 <label class="form-check-label" for="flexCheckDefault">
                     I Agree to Terms & Conditions
                 </label>
