@@ -1,21 +1,32 @@
 from django.db import models
 from django.contrib.auth.models import (BaseUserManager, AbstractBaseUser, PermissionsMixin)
 from django.urls import reverse  # used to generate URLs by reversing the URL patterns
+from django.utils import timezone
 import uuid  # required for Accounts to have a unique instance
+from django.utils import timezone
+
+
+accountTypes = {
+        'Customer': 1,
+        'Owner': 2,
+        'Manager': 3,
+        'Attendant': 4
+    }
 
 
 class AccountManager(BaseUserManager):
-    def _create_user(self, name, email, accountType, password=None, **extraFields):
+    def create_user(self, name, email, userType, password=None, last_login=None, **extraFields):
         """
         Creates and saves a User with the given name, email and password
         """
         if not email:
             raise ValueError('Users must have an email address')
 
+        now = timezone.now()
         user = self.model(
-            name=self.name,
+            name=name,
             email=self.normalize_email(email),
-            accountType=self.accountType,
+            last_login=now,
             **extraFields
         )
 
@@ -23,18 +34,17 @@ class AccountManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-    def create_user(self, name, email, accountType, password=None, **extraFields):
-        return self._create_user(name, email, accountType, password, **extraFields)
-
-    def create_superuser(self, name, email, accountType, password=None, **extraFields):
+    def create_superuser(self, name, email, password=None, **extraFields):
         """
         Creates and saves a superuser with the given name, email and password
         """
+
+        now = timezone.now()
         user = self.create_user(
             name=name,
             email=email,
             password=password,
-            accountType=accountType,
+            last_login=now,
             **extraFields
         )
         user.is_admin = True
@@ -45,17 +55,20 @@ class AccountManager(BaseUserManager):
 class Account(AbstractBaseUser, PermissionsMixin):
     # Fields
     USER_TYPE_CHOICES = (
-        (1, 'customer'),
-        (2, 'owner'),
-        (3, 'manager'),
-        (4, 'attendant'),
+        (1, 'Customer'),
+        (2, 'Owner'),
+        (3, 'Manager'),
+        (4, 'Attendant'),
     )
 
-    userType = models.PositiveSmallIntegerField(choices=USER_TYPE_CHOICES, default=1)
     name = models.CharField(max_length=40, help_text='Name of the user')
     email = models.EmailField(max_length=254, unique=True, help_text='Email of the user')
+    userType = models.PositiveSmallIntegerField(default=1)
     password = models.CharField(max_length=15, help_text="The users password")
-    # id = models.UUIDField(primary_key=True, default=uuid.uuid4(), help_text="Unique ID for this particular Account")
+    last_login = models.DateTimeField(null=True, blank=True)
+    is_superuser = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4(), help_text="Unique ID for this particular Account")
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['name', 'userType']
@@ -97,7 +110,7 @@ class Manager(models.Model):
 class Event(models.Model):
      name = models.CharField(max_length=50, help_text="The long name of the event, with spaces")
      shortName = models.CharField(max_length=15, help_text="Short event name, used when creating attendant 'email' addresses")
-     date = models.DateField
+     date = models.DateTimeField("Date", default=timezone.now)
      manager = models.ForeignKey(Manager, help_text="Manager who created the Event", on_delete=models.CASCADE)
      address = models.CharField(max_length=100, help_text="Address of the Event")
 
