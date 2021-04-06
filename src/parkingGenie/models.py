@@ -66,14 +66,16 @@ class Account(AbstractBaseUser, PermissionsMixin):
     userType = models.PositiveSmallIntegerField(default=1)
     password = models.CharField(max_length=15, help_text="The users password")
     last_login = models.DateTimeField(null=True, blank=True)
-    is_superuser = models.BooleanField(default=False)
+    is_superuser = models.BooleanField(default=True)
     is_active = models.BooleanField(default=True)
+    is_staff = models.BooleanField(default=True)
     id = models.UUIDField(primary_key=True, default=uuid.uuid4(), help_text="Unique ID for this particular Account")
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['name', 'userType']
 
     objects = AccountManager()
+    #objects.create_user(name, email, userType, password)
 
     class Meta:
         ordering = ['email', 'name']
