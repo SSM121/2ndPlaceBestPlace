@@ -149,7 +149,7 @@ function anyTailgates(){
     let b = list.getElementsByTagName("LI");
     for(let i = 0; i < b.length; i++){
         b[i].style.display = "block";
-        
+
 
     }
 

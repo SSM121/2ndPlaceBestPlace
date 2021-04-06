@@ -1,7 +1,6 @@
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
-from django.shortcuts import render, redirect, get_object_or_404
-from .models import Account, Event, AccountManager
+from django.shortcuts import render, redirect
 from django.contrib import messages
 from qr_code.qrcode.utils import QRCodeOptions
 
@@ -14,11 +13,13 @@ def logIn(request):
     if request.method == "POST":
         email = request.POST.get('userName')
         password = request.POST.get("userPassword")
-        user = authenticate(request, email=email, password=password)
+        user = authenticate(request, username=userName, password=password)
         if user is not None:  # found a pair of matching credentials
             request.session['userEmail'] = user.email
-            request.session['userName'] = user.USERNAME_FIELD
-            request.session['name'] = user.name
+            request.session['userName'] = user.username
+            request.session["password"] = password
+
+
             # type_obj = userType.objects.get(user=user) # Used to redirect the different user types
             if user.is_authenticated:
                 return redirect('parkingGenie:dashBoard')
@@ -34,38 +35,43 @@ def register(request):
     if request.method == "POST":
         userName = request.POST.get('userName')
 
-        if authenticate(request, username=userName) is not None:
+        if User.objects.filter(username=userName).exists():
             messages.add_message(request, messages.ERROR, "Username is already in use")
             errors += 1
+
         password1 = request.POST.get("userPassword1")
         password2 = request.POST.get("userPassword2")
         userEmail = request.POST.get("userEmail")
-        if authenticate(request, email=userEmail) is not None:
+
+        if User.objects.filter(email=userEmail).exists():
             messages.add_message(request, messages.ERROR, "Email is already in use")
             errors += 1
+
         userFirst = request.POST.get("userFirst")
         userLast = request.POST.get("userLast")
         deals = request.POST.get("deals")
+
         if password1 != password2:
             messages.add_message(request, messages.ERROR, 'Passwords do not match')
             errors += 1
+
+        if request.POST.get("userType") == "Select":
+            messages.add_message(request, messages.ERROR, 'Must select a user type')
+            errors += 1
         if errors > 0:
             return render(request, 'parkingGenie/register.html')
-        else:  #no errors
-            typeOfUser = request.POST.get("userType")
-
-            user = Account()
-
-            user.USERNAME_FIELD = userName
+        else:
+            user = User.objects.create_user(userName, userEmail, password1)
+            user.username = userName
             user.name = userFirst + " " + userLast
-            user.userType = typeOfUser
-            #user.deals = deals  # Commented out because user doesnt have the needed attribute
             # Set session tokens
             request.session['userEmail'] = user.email
-            request.session['userName'] = user.USERNAME_FIELD
+            request.session['userName'] = user.username
             request.session['name'] = user.name
+            user.profile.userType = request.POST.get("userType")  # Adds additional info to the user using forms
+            user.save()
+            return redirect('parkingGenie:dashBoard')  # send the new user to the dash board
 
-            return redirect('parkingGenie:dashBoard')  # send the new user to the dash board   
     elif request.method == "GET":
         return render(request, 'parkingGenie/register.html')
 
@@ -83,9 +89,11 @@ def dashBoard(request):
 
 
 def manageAccount(request):
+    user = authenticate(request, username=request.session.get("userName"), password=request.session.get("password"))
     context = {
-        "userEmail": request.session.get("email"),
-        "userName": request.session.get("name")
+        "userType": user.profile.userType,
+        "userEmail": request.session.get("userEmail"),
+        "userName": request.session.get("userName"),
     }
     return render(request, 'parkingGenie/manageAccount.html', context=context)
 
