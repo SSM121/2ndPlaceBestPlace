@@ -6,14 +6,6 @@ import uuid  # required for Accounts to have a unique instance
 from django.utils import timezone
 
 
-accountTypes = {
-        'Customer': 1,
-        'Owner': 2,
-        'Manager': 3,
-        'Attendant': 4
-    }
-
-
 class AccountManager(BaseUserManager):
     def create_user(self, name, email, userType, password=None, last_login=None, **extraFields):
         """
@@ -81,7 +73,7 @@ class Account(AbstractBaseUser, PermissionsMixin):
         ordering = ['email', 'name']
 
     def __str__(self):  # The __str__ method is useful  so if we want to print out an account we can.
-        return self.name.__str__() + " owns an account type of: " + self.accountType.__str__() \
+        return self.name.__str__() + " owns an account type of: " + self.USER_TYPE_CHOICES.__str__() \
                + ". The email attached to the account is " + self.email.__str__()
 
     def get_absolute_url(self):
