@@ -17,6 +17,7 @@ class AccountManager(BaseUserManager):
 
         now = timezone.now()
         user = self.model(
+            userType=userType,
             name=name,
             email=self.normalize_email(email),
             last_login=now,
@@ -54,21 +55,21 @@ class Account(AbstractBaseUser, PermissionsMixin):
         (4, 'Attendant'),
     )
 
-    def __init__(self):
-        name = models.CharField(max_length=40, help_text='Name of the user')
-        email = models.EmailField(max_length=254, unique=True, help_text='Email of the user')
-        userType = models.PositiveSmallIntegerField(default=1)
-        password = models.CharField(max_length=15, help_text="The users password")
-        last_login = models.DateTimeField(null=True, blank=True)
-        is_superuser = models.BooleanField(default=True)  # Can turn back to false
-        is_active = models.BooleanField(default=True)
-        is_staff = models.BooleanField(default=True)  # Can turn back to false
+    def __init__(self, name, email):
+        self.name = models.CharField(max_length=40, help_text='Name of the user')
+        self.email = models.EmailField(max_length=254, unique=True, help_text='Email of the user')
+        self.userType = models.PositiveSmallIntegerField(default=1)
+        self.password = models.CharField(max_length=15, help_text="The users password")
+        self.last_login = models.DateTimeField(null=True, blank=True)
+        self.is_superuser = models.BooleanField(default=True)  # Can turn back to false
+        self.is_active = models.BooleanField(default=True)
+        self.is_staff = models.BooleanField(default=True)  # Can turn back to false
 
         USERNAME_FIELD = 'email'
         REQUIRED_FIELDS = ['name', 'userType']  # password and email are automiatically required
 
         objects = AccountManager()
-        objects.create_user(name, email, userType, password)  # User type passed as an int
+        objects.create_user(self.name, self.email, self.userType, self.password)  # User type passed as an int
 
     class Meta:
         ordering = ['email', 'name']
