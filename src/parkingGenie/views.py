@@ -1,6 +1,8 @@
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect
+from django.contrib import messages
+from qr_code.qrcode.utils import QRCodeOptions
 
 
 def index(request):
@@ -11,39 +13,56 @@ def logIn(request):
     if request.method == "POST":
         userName = request.POST.get('userName')
         password = request.POST.get("userPassword")
-        user = authenticate(username=userName, password=password)
-        if user != None:  # found a pair of matching credentials
+        user = authenticate(request, username=userName, password=password)
+        if user is not None:  # found a pair of matching credentials
             request.session['userEmail'] = user.email
             request.session['userName'] = user.username
-            request.session['firstName'] = user.first_name
-            request.session['firstName'] = user.last_name
-            return redirect('parkingGenie:dashBoard')
+            # type_obj = userType.objects.get(user=user) # Used to redirect the different user types
+            if user.is_authenticated:
+                return redirect('parkingGenie:dashBoard')
         else:  # no matching credentials
+            messages.add_message(request, messages.ERROR, "Username or Password are incorrect")
             return render(request, 'parkingGenie/login.html')
     elif request.method == "GET":
         return render(request, 'parkingGenie/login.html')
 
 
 def register(request):
+    errors = 0
     if request.method == "POST":
         userName = request.POST.get('userName')
+
+        if User.objects.filter(username=userName).exists():
+            messages.add_message(request, messages.ERROR, "Username is already in use")
+            errors += 1
+
         password1 = request.POST.get("userPassword1")
         password2 = request.POST.get("userPassword2")
         userEmail = request.POST.get("userEmail")
+
+        if User.objects.filter(email=userEmail).exists():
+            messages.add_message(request, messages.ERROR, "Email is already in use")
+            errors += 1
+
         userFirst = request.POST.get("userFirst")
         userLast = request.POST.get("userLast")
-        if password1 == password2:
-            user = User.objects.create_user(userFirst, userEmail, password1)
+        deals = request.POST.get("deals")
+
+        if password1 != password2:
+            messages.add_message(request, messages.ERROR, 'Passwords do not match')
+            errors += 1
+
+        if errors > 0:
+            return render(request, 'parkingGenie/register.html')
+        else:
+            user = User.objects.create_user(userName, userEmail, password1)
             user.username = userName
-            user.last_name = userLast
+            user.name = userFirst + " " + userLast
             # Set session tokens
             request.session['userEmail'] = user.email
             request.session['userName'] = user.username
-            request.session['firstName'] = user.first_name
-            request.session['firstName'] = user.last_name
+            request.session['name'] = user.name
             return redirect('parkingGenie:dashBoard')  # send the new user to the dash board
-        else:  # passwords dont match
-            return render(request, 'parkingGenie/register.html')
     elif request.method == "GET":
         return render(request, 'parkingGenie/register.html')
 
@@ -166,4 +185,26 @@ def lotSearch(request, event_id):
         "lotList": lotList
     }
     return render(request, 'parkingGenie/lotSearch.html', context)
+
+
+def qrViewer(request):
+    # Build context for rendering QR codes.
+    context = {
+        "my_options": QRCodeOptions(size='m', border=0, error_correction='s'),
+        "qrCode": "http://127.0.0.1:8000/qrViewer",  # Will need to be replaced with dynamic QR code generator
+        "userName": request.session.get("userName")
+    }
+
+    # Render the view
+    return render(request, 'parkingGenie/qrViewer.html', context)
+
+
+def checkOut(request):
+    lotID = request.GET.get("lot")
+    eventName = request.GET.get("event")
+    context = {
+        "lotId": lotID,
+        "eventName": eventName,  # I think this will needed be substituted later with an event ID
+    }
+    return render(request, 'parkingGenie/checkOut.html', context)
 
