@@ -1,6 +1,7 @@
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
+from .models import Event
 from django.contrib import messages
 from qr_code.qrcode.utils import QRCodeOptions
 
