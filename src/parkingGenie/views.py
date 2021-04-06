@@ -13,6 +13,7 @@ def logIn(request):
     if request.method == "POST":
         email = request.POST.get('userName')
         password = request.POST.get("userPassword")
+        userName = request.POST.get("userName")
         user = authenticate(request, username=userName, password=password)
         if user is not None:  # found a pair of matching credentials
             request.session['userEmail'] = user.email
