@@ -33,7 +33,7 @@ def register(request):
     errors = 0
     if request.method == "POST":
         userName = request.POST.get('userName')
-        #TODO: create error message if username is taken
+
         if authenticate(request, username=userName) is not None:
             messages.add_message(request, messages.ERROR, "Username is already in use")
             errors += 1
@@ -49,7 +49,7 @@ def register(request):
         if password1 != password2:
             messages.add_message(request, messages.ERROR, 'Passwords do not match')
             errors += 1
-        if(errors > 0):
+        if errors > 0:
             return render(request, 'parkingGenie/register.html')
         else:  #no errors
             typeOfUser = request.POST.get("userType")

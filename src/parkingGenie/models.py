@@ -17,7 +17,7 @@ class AccountManager(BaseUserManager):
 
         now = timezone.now()
         user = self.model(
-            userType=userType,
+            #userType=userType,
             name=name,
             email=self.normalize_email(email),
             last_login=now,
@@ -55,7 +55,7 @@ class Account(AbstractBaseUser, PermissionsMixin):
         (4, 'Attendant'),
     )
 
-    def __init__(self, name, email):
+    def __init__(self):
         self.name = models.CharField(max_length=40, help_text='Name of the user')
         self.email = models.EmailField(max_length=254, unique=True, help_text='Email of the user')
         self.userType = models.PositiveSmallIntegerField(default=1)
