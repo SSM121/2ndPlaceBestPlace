@@ -1,4 +1,4 @@
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from django.contrib import messages
@@ -11,13 +11,14 @@ def index(request):
 
 def logIn(request):
     if request.method == "POST":
-        userName = request.POST.get('userName')
+        email = request.POST.get('userName')
         password = request.POST.get("userPassword")
         user = authenticate(request, username=userName, password=password)
         if user is not None:  # found a pair of matching credentials
             request.session['userEmail'] = user.email
             request.session['userName'] = user.username
             request.session["password"] = password
+
 
             # type_obj = userType.objects.get(user=user) # Used to redirect the different user types
             if user.is_authenticated:
@@ -70,6 +71,7 @@ def register(request):
             user.profile.userType = request.POST.get("userType")  # Adds additional info to the user using forms
             user.save()
             return redirect('parkingGenie:dashBoard')  # send the new user to the dash board
+
     elif request.method == "GET":
         return render(request, 'parkingGenie/register.html')
 
@@ -99,7 +101,7 @@ def manageAccount(request):
 def addEvent(request):
     return render(request, 'parkingGenie/addEvent.html')
 
-  
+
 def addLot(request):
     return render(request, 'parkingGenie/addLot.html')
 
@@ -113,37 +115,7 @@ def searchEvents(request):
     #   date: date represented as a string
     #   startTime: time as a string
     # }
-    eventList = []
-    eventList.append({
-        "id": 0,
-        "name": "BYU Vs USU",
-        "date": "Nov. 21, 2021",
-        "startTime": "9:00 a.m."
-    })
-    eventList.append({
-        "id": 1,
-        "name": "BYU Vs USU",
-        "date": "Nov. 21, 2021",
-        "startTime": "9:00 a.m."
-    })
-    eventList.append({
-        "id": 2,
-        "name": "USU Vs SDSU",
-        "date": "Oct. 19, 2021",
-        "startTime": "3:00 p.m."
-    })
-    eventList.append({
-        "id": 3,
-        "name": "USU Vs UNlV",
-        "date": "Oct. 20, 2021",
-        "startTime": "3:00 p.m."
-    })
-    eventList.append({
-        "id": 4,
-        "name": "USU Vs U of U",
-        "date": "Oct. 21, 2021",
-        "startTime": "5:00 p.m."
-    })
+    eventList = Event.objects.order_by('date')
     context = {
         'eventList': eventList,
     }
@@ -169,27 +141,31 @@ def lotSearch(request, event_id):
     #   address: string
     #   price: int
     #   hasTailGate: bool
+    #   distance in miles: int
     # }
     lotList.append({
         "lotID": 0,
         "openSpots": 69,
         "address": "dummy address 1",
         "price": 20,
-        "hasTailGate": True
+        "hasTailGate": True,
+        "distance": 4
     })
     lotList.append({
         "lotID": 1,
         "openSpots": 420,
         "address": "dummy address 2",
-        "price": 20,
-        "hasTailGate": False
+        "price": 10,
+        "hasTailGate": False,
+        "distance": 1
     })
     lotList.append({
         "lotID": 2,
         "openSpots": 42,
         "address": "dummy address 3",
         "price": 25,
-        "hasTailGate": True
+        "hasTailGate": True,
+        "distance": 5
     })
     context = {
         "eventInfo": eventInfo,
