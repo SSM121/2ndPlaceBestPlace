@@ -17,6 +17,8 @@ def logIn(request):
         if user is not None:  # found a pair of matching credentials
             request.session['userEmail'] = user.email
             request.session['userName'] = user.username
+            request.session["password"] = password
+
             # type_obj = userType.objects.get(user=user) # Used to redirect the different user types
             if user.is_authenticated:
                 return redirect('parkingGenie:dashBoard')
@@ -52,6 +54,9 @@ def register(request):
             messages.add_message(request, messages.ERROR, 'Passwords do not match')
             errors += 1
 
+        if request.POST.get("userType") == "Select":
+            messages.add_message(request, messages.ERROR, 'Must select a user type')
+            errors += 1
         if errors > 0:
             return render(request, 'parkingGenie/register.html')
         else:
@@ -62,6 +67,8 @@ def register(request):
             request.session['userEmail'] = user.email
             request.session['userName'] = user.username
             request.session['name'] = user.name
+            user.profile.userType = request.POST.get("userType")  # Adds additional info to the user using forms
+            user.save()
             return redirect('parkingGenie:dashBoard')  # send the new user to the dash board
     elif request.method == "GET":
         return render(request, 'parkingGenie/register.html')
@@ -80,9 +87,11 @@ def dashBoard(request):
 
 
 def manageAccount(request):
+    user = authenticate(request, username=request.session.get("userName"), password=request.session.get("password"))
     context = {
+        "userType": user.profile.userType,
         "userEmail": request.session.get("userEmail"),
-        "userName": request.session.get("userName")
+        "userName": request.session.get("userName"),
     }
     return render(request, 'parkingGenie/manageAccount.html', context=context)
 
@@ -93,6 +102,7 @@ def addEvent(request):
   
 def addLot(request):
     return render(request, 'parkingGenie/addLot.html')
+
 
 def searchEvents(request):
     # hear we will get info from the database but for now it will be poplulated with some dummy info
@@ -138,6 +148,7 @@ def searchEvents(request):
         'eventList': eventList,
     }
     return render(request, 'parkingGenie/events.html', context)
+
 
 def lotSearch(request, event_id):
     #dictionary for storing event info
