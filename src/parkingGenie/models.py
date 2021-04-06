@@ -11,6 +11,7 @@ class AccountManager(BaseUserManager):
         """
         Creates and saves a User with the given name, email and password
         """
+        # User type isn't saved any where
         if not email:
             raise ValueError('Users must have an email address')
 
@@ -23,7 +24,7 @@ class AccountManager(BaseUserManager):
         )
 
         user.set_password(password)
-        user.save(using=self._db)
+        user.save(using=self._db)  # Adds user to data base
         return user
 
     def create_superuser(self, name, email, password=None, **extraFields):
@@ -53,21 +54,21 @@ class Account(AbstractBaseUser, PermissionsMixin):
         (4, 'Attendant'),
     )
 
-    name = models.CharField(max_length=40, help_text='Name of the user')
-    email = models.EmailField(max_length=254, unique=True, help_text='Email of the user')
-    userType = models.PositiveSmallIntegerField(default=1)
-    password = models.CharField(max_length=15, help_text="The users password")
-    last_login = models.DateTimeField(null=True, blank=True)
-    is_superuser = models.BooleanField(default=True)
-    is_active = models.BooleanField(default=True)
-    is_staff = models.BooleanField(default=True)
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4(), help_text="Unique ID for this particular Account")
+    def __init__(self):
+        name = models.CharField(max_length=40, help_text='Name of the user')
+        email = models.EmailField(max_length=254, unique=True, help_text='Email of the user')
+        userType = models.PositiveSmallIntegerField(default=1)
+        password = models.CharField(max_length=15, help_text="The users password")
+        last_login = models.DateTimeField(null=True, blank=True)
+        is_superuser = models.BooleanField(default=True)  # Can turn back to false
+        is_active = models.BooleanField(default=True)
+        is_staff = models.BooleanField(default=True)  # Can turn back to false
 
-    USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['name', 'userType']
+        USERNAME_FIELD = 'email'
+        REQUIRED_FIELDS = ['name', 'userType']  # password and email are automiatically required
 
-    objects = AccountManager()
-    #objects.create_user(name, email, userType, password)
+        objects = AccountManager()
+        objects.create_user(name, email, userType, password)  # User type passed as an int
 
     class Meta:
         ordering = ['email', 'name']
