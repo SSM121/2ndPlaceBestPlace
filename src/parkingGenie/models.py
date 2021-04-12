@@ -10,6 +10,18 @@ class Profile(models.Model):  # Set up a profile to attach to a user
     userType = models.TextField(max_length=500, blank=True)
 
 
+class QRCodes(models.Model):
+    qrString = models.CharField(max_length=500)
+    '''Example of a qr string:
+    context = {
+        "my_options": QRCodeOptions(size='m', border=0, error_correction='s'),
+        "qrCode": "http://127.0.0.1:8000/qrViewer",  # Will need to be replaced with dynamic QR code generator
+        "userName": request.session.get("userName")
+    }
+    '''
+
+    profileOwner = models.ForeignKey(Profile, on_delete=models.CASCADE)
+
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
@@ -18,6 +30,9 @@ def create_user_profile(sender, instance, created, **kwargs):
 @receiver(post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs):
     instance.profile.save()
+
+# End USER EXTENSION
+# START OTHER MODELS
 
 
 class Event(models.Model):
