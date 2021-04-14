@@ -149,13 +149,8 @@ def lotSearch(request, event_id):
         return redirect('/')
     #dictionary for storing event info
     # should get from the event_id but for now just the info besides the id is just dummy values
-    eventInfo = {
-        "id": event_id,
-        "name": "USU Vs SDSU",
-        "date": "Oct. 19, 2021",
-        "startTime": "3:00 p.m."
-    }
-    lots = ParkingLot.objects.order_by('date')
+
+    lots = ParkingLot.objects.filter(event=event)
     # list of lot dictionaries
     lotList = []
     # should get lots for event given from database. for now dummy values are used
