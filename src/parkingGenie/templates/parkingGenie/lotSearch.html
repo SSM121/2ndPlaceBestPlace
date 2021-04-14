@@ -12,7 +12,6 @@
 <body onload="init()">
     <h1>Event: {{eventInfo.name}}</h1>
     <h2>Date: {{eventInfo.date}}</h2>
-    <h2>Time: {{eventInfo.startTime}}</h2>
     <div class="container">
         <div class="row">
             <div class="col col-8">
@@ -43,14 +42,12 @@
 <!--                                    <a href="#" class="card-link">Another link</a>-->
 <!--                                </div>-->
 
-                            <div class="card-body">
-                                <h5 class="card-title"><a> Location: {{Lot.address}} </a></h5>
-                                <h5>Price: ${{Lot.price}}</h5>
-                            </div>
-                            <ul class="list-group list-group-flush">
 
+                            <ul class="list-group list-group-flush">
+                                <h5 class="card-title">> {{Lot.name}}
+                                <h5 ><a> Location: {{Lot.address}} </a></h5>
+                                <h5>Price: ${{Lot.price}}</h5>
                                 <h5> Distance: {{Lot.distance}} Miles</h5>
-                                <h5> Open spots: {{Lot.openSpots}} </h5>
                                 <h5> Open spots: {{Lot.openSpots}} </h5>
                                 {% if Lot.hasTailGate %}
                                     <h5> Tail gate spots available </h5>

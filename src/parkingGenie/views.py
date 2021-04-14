@@ -1,7 +1,7 @@
 from django.contrib.auth import authenticate, get_user, login
 from django.contrib.auth.models import User
-from django.shortcuts import render, redirect
-from .models import Event
+from django.shortcuts import render, redirect, get_object_or_404
+from .models import Event, ParkingLot
 from django.contrib import messages
 from qr_code.qrcode.utils import QRCodeOptions
 
@@ -144,6 +144,7 @@ def searchEvents(request):
 
 
 def lotSearch(request, event_id):
+    event = get_object_or_404(Event, pk=event_id)
     if not checkLoggedIn(request):
         return redirect('/')
     #dictionary for storing event info
@@ -154,6 +155,7 @@ def lotSearch(request, event_id):
         "date": "Oct. 19, 2021",
         "startTime": "3:00 p.m."
     }
+    lots = ParkingLot.objects.order_by('date')
     # list of lot dictionaries
     lotList = []
     # should get lots for event given from database. for now dummy values are used
@@ -166,32 +168,23 @@ def lotSearch(request, event_id):
     #   hasTailGate: bool
     #   distance in miles: int
     # }
-    lotList.append({
-        "lotID": 0,
-        "openSpots": 69,
-        "address": "dummy address 1",
-        "price": 20,
-        "hasTailGate": True,
-        "distance": 4
-    })
-    lotList.append({
-        "lotID": 1,
-        "openSpots": 420,
-        "address": "dummy address 2",
-        "price": 10,
-        "hasTailGate": False,
-        "distance": 1
-    })
-    lotList.append({
-        "lotID": 2,
-        "openSpots": 42,
-        "address": "dummy address 3",
-        "price": 25,
-        "hasTailGate": True,
-        "distance": 5
-    })
+    for lot in lots:
+        # need to do distance calc
+        element = {
+            "lotID": lot.id,
+            "openSpots": lot.parking + lot.tailgate,
+            "address": lot.address,
+            "price": lot.price,
+            "distance": 4,
+            "hasTailGate": False,
+            "name" : lot.name
+        }
+        if(lot.tailgate > 0):
+            element["hasTailGate"] = True
+        lotList.append(element)
+
     context = {
-        "eventInfo": eventInfo,
+        "eventInfo": event,
         "lotList": lotList
     }
     return render(request, 'parkingGenie/lotSearch.html', context)
