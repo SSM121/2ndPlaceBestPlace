@@ -1,7 +1,9 @@
 from django.contrib.auth import authenticate, get_user, login
 from django.contrib.auth.models import User
+
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Event, ParkingLot
+from .models import Event, ParkingLot, QrCodes
+
 from django.contrib import messages
 from qr_code.qrcode.utils import QRCodeOptions
 
@@ -11,6 +13,18 @@ def checkLoggedIn(my_request):  # used to make sure user is not anon
         return False
     else:
         return True
+
+
+def applyQR(request):
+    user = get_user(request)
+    qrString = 'context = { ' \
+               '"my_options": QRCodeOptions(size="m", border=0, error_correction="s"), ' \
+               '"qrCode": "http://127.0.0.1:8000/qrViewer", ' \
+               '"userName": request.session.get("userName")' \
+               '}'
+    qr = QRCodes(id=None, profileOwner=user, qrString=qrString)
+    qr.save()
+    redirect("dashBoard")
 
 
 def index(request):
@@ -26,9 +40,6 @@ def logIn(request):
         if user is not None:  # found a pair of matching credentials
             request.session['userEmail'] = user.email
             request.session['userName'] = user.username
-            request.session["password"] = password
-
-            request.user = user
 
             # type_obj = userType.objects.get(user=user) # Used to redirect the different user types
             if user.is_authenticated:
@@ -104,7 +115,7 @@ def dashBoard(request):
 def manageAccount(request):
     if not checkLoggedIn(request):
         return redirect('/')
-    user = authenticate(request, username=request.session.get("userName"), password=request.session.get("password"))
+    user = get_user(request)
     context = {
         "userType": user.profile.userType,
         "userEmail": request.session.get("userEmail"),
@@ -194,9 +205,6 @@ def qrViewer(request):
     if not checkLoggedIn(request):
         return redirect('/')
     # Build context for rendering QR codes.
-    #user = request.user
-    print("rat")
-    user = get_user(request)
     context = {
         "my_options": QRCodeOptions(size='m', border=0, error_correction='s'),
         "qrCode": "http://127.0.0.1:8000/qrViewer",  # Will need to be replaced with dynamic QR code generator
@@ -210,6 +218,7 @@ def qrViewer(request):
 def checkOut(request):
     if not checkLoggedIn(request):
         return redirect('/')
+    user = get_user(request)
     lotID = request.GET.get("lot")
     eventName = request.GET.get("event")
     context = {

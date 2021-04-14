@@ -37,8 +37,7 @@ def save_user_profile(sender, instance, **kwargs):
 
 class Event(models.Model):
     name = models.CharField(max_length=50, help_text="The long name of the event, with spaces")
-    shortName = models.CharField(max_length=15,
-                                 help_text="Short event name, used when creating attendant 'email' addresses")
+    shortName = models.CharField(max_length=15, help_text="Short event name, used when creating attendant 'email' addresses")
     date = models.DateTimeField("Date", default=timezone.now)
     #manager = models.ForeignKey(Manager, help_text="Manager who created the Event", on_delete=models.CASCADE)
     address = models.CharField(max_length=100, help_text="Address of the Event")
