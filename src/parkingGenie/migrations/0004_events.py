@@ -64,6 +64,7 @@ def populate_db(apps, schema_editor):
     )
     l4.save()
     l4.event.add(e1)
+    l4.event.add(e2)
 
 
 
